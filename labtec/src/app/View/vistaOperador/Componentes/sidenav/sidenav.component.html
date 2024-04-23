@@ -1,0 +1,43 @@
+
+<!-- para el diseño de seleccion del menu -->
+<mat-toolbar color="primary">
+  <button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+  </button>
+</mat-toolbar>
+<!-- Para el sidebar-->
+
+<mat-drawer-container>
+  <!-- Cajón en el lado izquierdo -->
+  <mat-drawer #drawer opened="false" mode="over">
+    <mat-nav-list>
+      <mat-list-item>
+        <button routerLink="tipoplato" mat-button>
+          <mat-icon>restaurant_menu</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Tipo de plato
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="menu" mat-button>
+          <mat-icon>menu_book</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Menú
+        </button>
+
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="estadisticas" mat-button>
+          <mat-icon>bar_chart</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Estadísticas
+        </button>
+      </mat-list-item>
+      <!-- Agrega más elementos de lista aquí si es necesario -->
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!-- Contenido principal -->
+  <mat-drawer-content>
+    <div style="text-align: center;min-height: 600px;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
