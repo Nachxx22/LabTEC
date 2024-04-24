@@ -18,9 +18,9 @@
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button routerLink="menu" mat-button>
+        <button routerLink="vistaActivos" mat-button>
           <mat-icon>menu_book</mat-icon> <!-- Agrega el nombre del ícono que desees -->
-          Menú
+          Préstamo de activos.
         </button>
 
       </mat-list-item>
@@ -30,7 +30,7 @@
           Estadísticas
         </button>
       </mat-list-item>
-      <!-- Agrega más elementos de lista aquí si es necesario -->
+      <!-- Agregar más elementos de lista aquí de ser necesario -->
     </mat-nav-list>
   </mat-drawer>
 
@@ -38,6 +38,7 @@
   <mat-drawer-content>
     <div style="text-align: center;min-height: 600px;">
       <router-outlet></router-outlet>
+      <!-- aca se debe de lamar el router-outlet para que funcione -->
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

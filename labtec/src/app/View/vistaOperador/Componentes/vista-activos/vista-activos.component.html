@@ -1,0 +1,23 @@
+<!---->
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Activos disponibles
+  </h1>
+  <div class="row">
+    <div class="col-4" *ngFor= "let activo of activosRecibidos">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5">
+              <img [src]="activo.imageURL" class="imagen-contenedor" alt="notfout">
+              <p class="">{{activo.name}}</p>
+            </div>
+            <div class="col-7 text-end">
+              <h4 class="">{{activo.description}}</h4>
+              <button class="btn btn-sm btn-success ">reservar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
