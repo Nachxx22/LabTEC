@@ -1,23 +1,27 @@
 <!---->
 <div class="container mt-5">
-  <h1 class="text-center mb-4">Activos disponibles
-  </h1>
+  <h1 class="text-center mb-4">Activos disponibles</h1>
   <div class="row">
-    <div class="col-4" *ngFor= "let activo of activosRecibidos">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-5">
+    <div class="col-4" *ngFor="let activo of activosRecibidos; let i = index">
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="row">
+            <div fxFlex="40%">
               <img [src]="activo.imageURL" class="imagen-contenedor" alt="notfout">
               <p class="">{{activo.name}}</p>
             </div>
-            <div class="col-7 text-end">
+            <div fxFlex="60%" fxLayout="column" fxLayoutAlign="end">
               <h4 class="">{{activo.description}}</h4>
-              <button class="btn btn-sm btn-success ">reservar</button>
+              <button mat-raised-button color="primary" (click)="mostrarForm(i)">Reservar</button>
             </div>
           </div>
-        </div>
-      </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
+<!-- para abrir el modal-->
+<!-- Agrega este componente modal dentro del template de tu componente Angular -->
+
+
+
