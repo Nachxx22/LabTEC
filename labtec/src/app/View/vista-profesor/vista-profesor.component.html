@@ -1,1 +1,52 @@
-<p>vista-profesor works!</p>
+
+<!-- para el diseño de seleccion del menu -->
+<mat-toolbar color="primary">
+  <button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+  </button>
+</mat-toolbar>
+<!-- Para el sidebar-->
+
+<mat-drawer-container>
+  <!-- Cajón en el lado izquierdo -->
+  <mat-drawer #drawer opened="false" mode="over">
+    <mat-nav-list>
+      <mat-list-item>
+        <button routerLink="Buscar activos" mat-button>
+          <mat-icon>search</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Buscar activos
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="Buscar laboratorios" mat-button>
+          <mat-icon>search</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Buscar laboratorios
+        </button>
+
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="Solicitar reservas" mat-button>
+          <mat-icon>done</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Solicitar reservas
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button routerLink="Préstamo de activos" mat-button>
+          <mat-icon>done</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Aprovación de préstamos
+
+        </button>
+      </mat-list-item>
+      <!-- Agrega más elementos de lista aquí si es necesario -->
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!-- Contenido principal -->
+  <mat-drawer-content>
+    <div style="text-align: center;min-height: 600px;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
