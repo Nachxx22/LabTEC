@@ -1,6 +1,6 @@
 <div class=" container" >
-  <mat-toolbar>
-    <span style="margin-right: auto;">Solicitudes de préstamo de activos</span>
+  <mat-toolbar class="custom-toolbar toolbar-with-border" style="display: flex; justify-content: center;">
+    <span >Solicitudes de préstamo de activos</span>
   </mat-toolbar>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -21,10 +21,10 @@
     </ng-container>
 
     <ng-container matColumnDef="Opcion" >
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Opcion </th>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Opción </th>
       <td mat-cell *matCellDef="let element">
         <!-- Primer botón -->
-        <div style="display: flex; gap: 15px;">
+        <div style="display: flex; justify-content: center; gap: 15px;">
           <button mat-icon-button>
             <mat-icon>done</mat-icon>
           </button>
