@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import {Router,RouterLink,RouterOutlet} from "@angular/router";
+import {MatCard, MatCardContent} from "@angular/material/card";
+import {MatInput} from "@angular/material/input";
+import {NgIf} from "@angular/common";
+import {MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink,RouterOutlet],
+  imports: [RouterLink, RouterOutlet, MatCardContent, MatInput, NgIf, MatButton, MatIcon, MatCard],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -25,6 +30,9 @@ export class LoginComponent {//definicion de la clase
       //por ahora sin flags
       this.router.navigate(['sidenav']);
     }
+  }
+  registrarse(){
+
   }
   /*el codigo del routerlink puede hacerse de 2 maneras, con un constructor o con el boton con routerLink
   * //creo que preferiblemente es mejor asi por temas de conectarse al backend*/

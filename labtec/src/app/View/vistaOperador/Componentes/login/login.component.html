@@ -1,7 +1,21 @@
-<section class="center-container">
-  <form>
-    <input type="text" placeholder="Usuario">
-    <input type="password" placeholder="Contraseña">
-    <button (click)="verifyLogin()" type="button">Iniciar</button>
-  </form>
-</section>
+<div class="center-container">
+  <mat-card>
+    <mat-card-content class="content-container">
+      <div class="vertical-align">
+        <label>Nombre de usuario</label>
+        <input matInput placeholder="Usuario">
+        <label>Contraseña</label>
+        <input matInput placeholder="Contraseña">
+
+        <button mat-button (click)="verifyLogin()">
+          <mat-icon>bar_chart</mat-icon>
+          Iniciar Sesión
+        </button>
+        <button mat-button (click)="registrarse()">
+          <mat-icon>bar_chart</mat-icon>
+          Registrarse
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

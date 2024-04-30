@@ -1,0 +1,35 @@
+<button mat-icon-button  mat-dialog-close style="float:right;margin:5px">
+  <mat-icon >close </mat-icon>
+</button>
+<mat-dialog-content>
+  <header>
+    <h1>
+      Devolución de activo
+    </h1>
+  </header>
+  <p>
+    <mat-form-field style="display: flex;">
+      <input matInput placeholder="nombre del activo" [value]="data.nombreActivo" readonly style="flex: 1;">
+      <input matInput placeholder="Id" [value]="data.idActivo" readonly style="flex: 1;">
+    </mat-form-field>
+  </p>
+  <p><mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onToggleChange($event)" [value]="false">
+    <mat-button-toggle value="false">Activo averiado</mat-button-toggle>
+    <mat-button-toggle value="true">Activo NO averiado</mat-button-toggle>
+  </mat-button-toggle-group></p>
+  <p><mat-form-field>
+    <input matInput placeholder="Contraseña operador">
+  </mat-form-field></p>
+
+  <p><mat-form-field *ngIf="Averia">
+    <input matInput placeholder="Descripcion de la avería">
+  </mat-form-field></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary"  [disabled]="!banderaparaenviar">
+    devolverActivo
+  </button>
+  <button mat-raised-button color="warn" mat-dialog-close>
+    cancelar
+  </button>
+</mat-dialog-actions>
