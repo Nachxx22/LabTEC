@@ -1,0 +1,9 @@
+[{
+    "correo": "pedro@example.com",
+    "contrasena": "mysecretpass"
+  },
+  {
+    "correo": "maria@example.com",
+    "contrasena": "securepassword"
+  }
+]
