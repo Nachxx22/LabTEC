@@ -62,7 +62,7 @@ export class FormActivosComponent {
       }//mada al servicio de envio
       this.servicio.solicitarReserva(reservaEst).subscribe(
         response => {
-          console.log('Datos enviados al servidor:', response);
+          console.log('Datos de reserva:', response);
 
         },
         error => {
@@ -84,7 +84,7 @@ export class FormActivosComponent {
       }
       this.servicio.solicitarReservaP(reservaProf).subscribe(
         response => {
-          console.log('Datos enviados al servidor:', response);
+          console.log('Datos de reserva:', response);
         },
         error => {
           console.error('Error al enviar datos al servidor:', error);

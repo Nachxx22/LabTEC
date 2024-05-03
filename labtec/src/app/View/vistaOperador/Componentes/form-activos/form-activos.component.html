@@ -33,7 +33,7 @@
   <label *ngIf="!profesorSeleccionado">{{ data.nombreActivo }}</label>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary"  [disabled]="!banderaparaenviar">
+  <button mat-raised-button color="primary"  (click)="realizarReserva()" [disabled]="!banderaparaenviar">
     Solicitar prestamo
   </button>
   <button mat-raised-button color="warn" mat-dialog-close>
