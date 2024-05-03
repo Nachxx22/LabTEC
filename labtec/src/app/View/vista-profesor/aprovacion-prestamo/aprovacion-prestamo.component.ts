@@ -27,6 +27,8 @@ export interface Platillos { //por ahora esta interfaz queda asi
 const platillos_ver: Platillos[] = [
   { Activo: 'FPGA', Solicitante: 'Pepe', Operador: 'Juan' }];
 
+
+
 @Component({
   selector: 'app-aprovacion-prestamo',
   standalone: true,
@@ -56,7 +58,13 @@ const platillos_ver: Platillos[] = [
 })
 export class AprovacionPrestamoComponent {
 
-  displayedColumns: string[] = ['Activo', 'Solicitante', 'Operador', 'Opcion'];
-  dataSource = platillos_ver;
+  data = [
+    { id: 1, componente: 'FPGA', solicitante: 'Andrés', carnet: '2020129522', estado: '' }
+    // Agrega más datos aquí si es necesario
+  ];
+
+  updateStatus(item: any, status: string) {
+    item.estado = status;
+  }
 
 }

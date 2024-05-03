@@ -5,6 +5,7 @@ import {VistaProfesorComponent} from "./View/vista-profesor/vista-profesor.compo
 import {AprovacionPrestamoComponent} from "./View/vista-profesor/aprovacion-prestamo/aprovacion-prestamo.component";
 import {CambioPasswordComponent} from "./View/vista-profesor/cambio-password/cambio-password.component";
 import {ReservacionesComponent} from "./View/vista-profesor/reservaciones/reservaciones.component";
+import {InicioComponent} from "./View/vista-profesor/inicio/inicio.component";
 
 export const routes: Routes = [
   {path: 'sidenav', component: SidenavComponent},
@@ -12,7 +13,8 @@ export const routes: Routes = [
   {path: 'vistaProfesor', component: VistaProfesorComponent,
     children:[{path: 'cambio-password',component: CambioPasswordComponent},
       {path:'aprovacion-prestamo',component:AprovacionPrestamoComponent},
-      {path:'reservaciones',component: ReservacionesComponent}]},
+      {path:'reservaciones',component: ReservacionesComponent},
+      {path:'inicio',component: InicioComponent}]},
   {path: '', redirectTo: 'vistaProfesor', pathMatch: 'full'}
   //children:[{path: 'tipoplato',component: TipoplatoComponent},
   // {path:'menu',component:MenuComponent},

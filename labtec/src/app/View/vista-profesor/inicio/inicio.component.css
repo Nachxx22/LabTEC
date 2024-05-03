@@ -1,0 +1,9 @@
+.border-dashed { --bs-border-style: dashed; }
+
+.custom-div {
+  padding-bottom: 1rem; /* pb-1 */
+  text-align: center; /* text-center */
+  background-color: #6c6969; /* bg-body-tertiary */
+  border-radius: 1rem; /* rounded-5 */
+  border: 2px solid #000000; /* Grosor y color del borde */
+}

@@ -14,6 +14,12 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 })
 export class VistaProfesorComponent {
 
+  menuBarVisible: boolean = false;
+
+  toggleMenuBar() {
+    this.menuBarVisible = !this.menuBarVisible;
+  }
+
 }
 
 

@@ -1,14 +1,134 @@
-main {
-  height: 100vh;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  background-color: #394aa0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.bg-body-tertiary {
-  --bs-bg-opacity: 1;
-  background-color: #6c6969 !important;
+.line-custom{
+  border: 2px solid #000000; /* Grosor y color del borde */
+
+}
+
+.container {
+  height: 100vh; /* 100% de la altura de la ventana gráfica */
+  max-width: 100%; /* Ajuste máximo del ancho de la ventana gráfica */
+  overflow-y: hidden; /* Oculta el desbordamiento vertical */
+  background-color: #576291;
+  color: #000000;
+}
+
+.container .sidenav {
+  width: 115px; /* Ancho inicial del menú lateral */
+  overflow: hidden;
+  position: fixed;
+  padding: 32px 16px;
+  background-color: #6c6969;
+  transition: width 0.6s;
+  left: 10px; /* Ajusta el margen izquierdo */
+  top: 10px; /* Ajusta el margen superior */
+  height: calc(100% - 20px); /* Ajusta la altura */
+  border-radius: 1rem; /* rounded-5 */
+  border: 2px solid #000000; /* Grosor y color del borde */
 }
 
 
+label .close-btn{
+  display: none;
+}
+
+.container .logo h2{
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+
+.sidenav .icon_items ul{
+  list-style: none;
+  margin-top: 32px;
+  padding: 0 10px;
+}
+
+.sidenav .icon_items ul li{
+  cursor: pointer;
+  margin: 0px;
+  padding: 12px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: 0.5s ease;
+}
+
+.icon_items .active,
+.sidenav .icon_items ul li:hover{
+  background: #576291;
+}
+
+.sidenav .icon_items ul li i{
+  font-size: 26px;
+  padding: 0 12px;
+}
+
+.sidenav .icon_items ul li a{
+  text-decoration: none;
+  color: #000000;
+  font-size: 17px;
+  padding-left: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+#click{
+  display: none;
+}
+
+.container label{
+  position: absolute;
+  left: 50px;
+  top: 40px;
+  font-size: 24px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#click:checked ~ .sidenav{
+  width: 250px;
+}
+
+#click:checked ~ .sidenav .icon_items ul li a{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#click:checked ~ .sidenav .logo h2{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#click:checked ~ .sidenav .search_bar input{
+  width: 100%;
+  margin-left: 0;
+}
+
+#click:checked ~ .sidenav .search_bar i{
+  left: 20px;
+}
+
+#click:checked ~ label{
+  left: 20px;
+}
+
+#click:checked ~ label .close-btn{
+  display: block;
+}
+
+#click:checked ~ label .menu-btn{
+  display: none;
+}
