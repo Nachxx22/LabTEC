@@ -5,12 +5,16 @@ import {MatInput} from "@angular/material/input";
 import {NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-
-
+import {ComunicationService} from "../../../../Servicios/comunication.service";
+import {FormsModule} from "@angular/forms";
+export interface loginTemplate{ //class template para obtener datos del Json
+  correo:string;
+  contrasena:string;
+}
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, MatCardContent, MatInput, NgIf, MatButton, MatIcon, MatCard],
+  imports: [RouterLink, RouterOutlet, MatCardContent, MatInput, NgIf, MatButton, MatIcon, MatCard, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,17 +23,36 @@ import {MatIcon} from "@angular/material/icon";
 
 export class LoginComponent {//definicion de la clase
   //supongo que aca declaro las variables que necesito para su uso en HTML
-  isLogged = true;
+  isLogged = false;
+  usuarioTextbox= "";
+  contrasenaTextbox="";
   //constructor(private router: Router) {}
   //this.router.navigate(['/logged']);
-  constructor(private router: Router) {}//invoco el metodo router
+  constructor(private router: Router, private servicio:ComunicationService) {}//invoco el metodo router
   //es como crear una clase
   //aca hay que meterle los servicios del login por asi decirlo
   verifyLogin(){ //metodo que verifica el login/
-    if(this.isLogged){
-      //por ahora sin flags
-      this.router.navigate(['sidenav']);
+    const datosLogin ={//datos para el backend de login
+      correo:this.usuarioTextbox,
+      contrasena:this.contrasenaTextbox
     }
+    console.log(datosLogin.contrasena);
+    this.servicio.verifyLogin(datosLogin).subscribe(
+      response => {
+        console.log('Datos enviados al servidor:', response);
+        this.isLogged = response;
+        if (this.isLogged) {
+          this.router.navigate(['sidenav']);
+        } else {
+          console.log('Usuario incorrecto');
+        }
+
+      },
+      error => {
+        console.error('Error al enviar datos al servidor:', error);
+
+      }
+    );
   }
   registrarse(){
 

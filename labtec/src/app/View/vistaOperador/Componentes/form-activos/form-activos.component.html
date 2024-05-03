@@ -18,16 +18,16 @@
     <mat-button-toggle value="true">Profesor</mat-button-toggle>
   </mat-button-toggle-group></p>
   <p><mat-form-field>
-    <input matInput placeholder="nombre del solicitante">
+    <input matInput placeholder="nombre del solicitante" [(ngModel)]="nombreTextbox">
   </mat-form-field></p>
   <p><mat-form-field>
-    <input matInput placeholder="Apellido del solicitante">
+    <input matInput placeholder="Apellido del solicitante" [(ngModel)]="apellidoTextbox">
   </mat-form-field></p>
   <p><mat-form-field>
-    <input matInput placeholder="Correo del solicitante">
+    <input matInput placeholder="Correo del solicitante" [(ngModel)]="correoTextbox">
   </mat-form-field></p>
   <p><mat-form-field *ngIf="profesorSeleccionado">
-    <input matInput placeholder="contraseña del profesor">
+    <input matInput placeholder="contraseña del profesor" type="password" [(ngModel)]="contrasenaTextbox">
   </mat-form-field></p>
   <label *ngIf="!profesorSeleccionado">Requiere de la aprobación de:</label>
   <label *ngIf="!profesorSeleccionado">{{ data.nombreActivo }}</label>

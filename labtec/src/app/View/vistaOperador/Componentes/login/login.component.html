@@ -3,9 +3,9 @@
     <mat-card-content class="content-container">
       <div class="vertical-align">
         <label>Nombre de usuario</label>
-        <input matInput placeholder="Usuario">
+        <input matInput placeholder="Usuario"  [(ngModel)]="usuarioTextbox">
         <label>Contraseña</label>
-        <input matInput placeholder="Contraseña">
+        <input matInput placeholder="Contraseña" type="password" [(ngModel)]="contrasenaTextbox">
 
         <button mat-button (click)="verifyLogin()">
           <mat-icon>bar_chart</mat-icon>

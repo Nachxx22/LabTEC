@@ -17,7 +17,7 @@ export const routes: Routes = [
     ]},
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'vistaActivos',component: VistaActivosComponent}
+  //{path: 'vistaActivos',component: VistaActivosComponent}
   //children:[{path: 'tipoplato',component: TipoplatoComponent},
   // {path:'menu',component:MenuComponent},
   //{path:'estadisticas',component: EstadisticasComponent}]}

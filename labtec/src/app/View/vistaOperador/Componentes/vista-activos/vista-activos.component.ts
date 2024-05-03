@@ -5,6 +5,9 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {FormActivosComponent} from "../form-activos/form-activos.component";
+import {MatButton} from "@angular/material/button";
+import {MatToolbar} from "@angular/material/toolbar";
+import {ComunicationService} from "../../../../Servicios/comunication.service";
 
 export interface Activo { //creo una interfaz que se puede exportar,
   //con esto leo todos los elementos que existen en
@@ -16,9 +19,9 @@ export interface Activo { //creo una interfaz que se puede exportar,
 @Component({
   selector: 'app-vista-activos',
   standalone: true,
-  imports: [
-    NgFor, NgIf, MatCard, MatCardContent, MatIcon
-  ],
+    imports: [
+        NgFor, NgIf, MatCard, MatCardContent, MatIcon, MatButton, MatToolbar
+    ],
   templateUrl: './vista-activos.component.html',
   styleUrl: './vista-activos.component.css'
 })
@@ -71,7 +74,22 @@ export class VistaActivosComponent {
     //en formActivosComponent. y el ancho del dialog
 
   }
-  constructor(private matDialog:MatDialog) {}//se inyecta el servicio
+  //Constructor de la clase, se le inyecta el dialog, y el comunicationService.
+  constructor(private matDialog:MatDialog , private servicio:ComunicationService) {}//se inyecta el servicio
+  mostrarActivos(){//metodo que solicita del servidor todos los activos disponibles
+    //para reservar.
+    this.servicio.getActivos().subscribe(
+      response => {
+        console.log('Datos enviados al servidor:', response);
+
+        this.activosRecibidos = response;
+      },
+      error => {
+        console.error('Error al enviar datos al servidor:', error);
+        // Maneja el error adecuadamente aquí
+      }
+    );
+  }
   //matdialog para poder abrir matdialogs en este componente
 // Para cerrar el modal
 

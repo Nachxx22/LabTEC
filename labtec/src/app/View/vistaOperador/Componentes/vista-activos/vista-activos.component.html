@@ -1,6 +1,13 @@
 <!---->
 <div class="container mt-5">
-  <h1 class="text-center mb-4">Activos disponibles</h1>
+  <mat-toolbar>
+    <span style="margin-right: auto;">Activos disponibles</span>
+    <div class="contenedorBotones">
+      <button   mat-raised-button (click)="mostrarActivos()" class="contenedorBot4" >
+        mostrar reportes
+      </button>
+    </div>
+  </mat-toolbar>
   <div class="row">
     <div class="col-4" *ngFor="let activo of activosRecibidos; let i = index">
       <mat-card>
