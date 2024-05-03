@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import {SidenavComponent} from "./View/vistaOperador/Componentes/sidenav/sidenav.component";
-import {LoginComponent} from "./View/vistaOperador/Componentes/login/login.component";
+import {SidenavComponent} from "./View/vistaAdministrador/Componentes/sidenav/sidenav.component";
+import {LoginComponent} from "./View/vistaAdministrador/Componentes/login/login.component";
 
 export const routes: Routes = [
   {path: 'sidenav', component: SidenavComponent},

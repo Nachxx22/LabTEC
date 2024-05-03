@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {SidenavComponent} from "./View/vistaOperador/Componentes/sidenav/sidenav.component";
+import {SidenavComponent} from "./View/vistaAdministrador/Componentes/sidenav/sidenav.component";
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClient} from "@angular/common/http";
-import {LoginComponent} from "./View/vistaOperador/Componentes/login/login.component";
+import {LoginComponent} from "./View/vistaAdministrador/Componentes/login/login.component";
 
 
 
