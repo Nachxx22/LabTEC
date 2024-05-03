@@ -1,0 +1,22 @@
+[
+    {
+      "usuario": "gerardo" ,    
+      "Fecha": "2024-04-01",
+      "Ingreso": "08:00",
+      "Salida": "17:00",
+      "horasTrabajadas": 9
+    },
+    {
+      "usuario": "gerardo",
+      "Fecha": "2024-04-02",
+      "Ingreso": "08:15",
+      "Salida": "16:45",
+      "horasTrabajadas": 8
+    },
+    { "usuario": "alcides",
+      "Fecha": "2024-04-03",
+      "Ingreso": "07:45",
+      "Salida": "17:15",
+      "horasTrabajadas": 10
+    }
+  ]
