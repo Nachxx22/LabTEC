@@ -1,0 +1,6 @@
+@LabTecAPI_HostAddress = http://localhost:5276
+
+GET {{LabTecAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
