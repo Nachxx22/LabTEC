@@ -1,5 +1,12 @@
 .border-dashed { --bs-border-style: dashed; }
 
+.custom-container{
+  background-color: #000000; /* bg-body-tertiary */
+  padding: 2rem;
+  border-radius: 1rem; /* rounded-5 */
+
+}
+
 .custom-div {
   padding-bottom: 1rem; /* pb-1 */
   text-align: center; /* text-center */
@@ -7,3 +14,4 @@
   border-radius: 1rem; /* rounded-5 */
   border: 2px solid #000000; /* Grosor y color del borde */
 }
+
