@@ -55,7 +55,7 @@ export class LoginComponent {//definicion de la clase
     );
   }
   registrarse(){
-
+    this.router.navigate(['register']);
   }
   /*el codigo del routerlink puede hacerse de 2 maneras, con un constructor o con el boton con routerLink
   * //creo que preferiblemente es mejor asi por temas de conectarse al backend*/

@@ -7,6 +7,7 @@ import {
   VistaLaboratoriosComponent
 } from "./View/vistaOperador/Componentes/vista-laboratorios/vista-laboratorios.component";
 import {DevolucionActivosComponent} from "./View/vistaOperador/Componentes/devolucion-activos/devolucion-activos.component";
+import {RegisterComponent} from "./View/vistaOperador/Componentes/register/register.component";
 
 export const routes: Routes = [
   {path: 'sidenav', component: SidenavComponent,
@@ -16,6 +17,7 @@ export const routes: Routes = [
       {path:'vistaDevoluciones',component: DevolucionActivosComponent}
     ]},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   //{path: 'vistaActivos',component: VistaActivosComponent}
   //children:[{path: 'tipoplato',component: TipoplatoComponent},

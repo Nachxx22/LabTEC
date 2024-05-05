@@ -1,0 +1,33 @@
+<div class="center-container">
+  <mat-card>
+    <mat-card-content class="content-container">
+      <div class="vertical-align">
+        <label>Numero de cédula</label>
+        <input matInput placeholder="Cédula"  [(ngModel)]="cedulaTextbox">
+        <label>Número de carnét</label>
+        <input matInput placeholder="Numero de carnét"  [(ngModel)]="carnetTextbox">
+        <label>Nombre</label>
+        <input matInput placeholder="Nombre"  [(ngModel)]="nombreTextbox">
+        <label>Apellido</label>
+        <input matInput placeholder="Apellido"  [(ngModel)]="apellidoTextbox">
+        <label>Edad</label>
+        <input matInput placeholder="Edad"  [(ngModel)]="edadTextbox">
+        <label>Fecha de nacimiento</label>
+        <input matInput placeholder="04/06/1995"  [(ngModel)]="fenacimientoTextbox">
+        <label>Correo Electrónico</label>
+        <input matInput placeholder="Correo"  [(ngModel)]="correoTextbox">
+        <label>Contraseña</label>
+        <input matInput placeholder="contraseña" type="password" [(ngModel)]="passwordTextbox">
+        <button mat-button (click)="registrarUsuario()">
+          <mat-icon>bar_chart</mat-icon>
+          Registrarse
+        </button>
+        <button (click)="volverLogin()" mat-button >
+          <mat-icon>bar_chart</mat-icon>
+          Volver al inicio
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

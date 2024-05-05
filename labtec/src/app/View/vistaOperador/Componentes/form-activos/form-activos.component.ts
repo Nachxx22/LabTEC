@@ -48,12 +48,13 @@ export class FormActivosComponent {
   //data es el nombre de la data que se pasa , se usa en el html
 
   //metodo para realizar las reservas a la base de datos:
-  realizarReserva(){
+  realizarReserva(){//arreglado**
     if(!this.profesorSeleccionado){//si se seleccionó al reservador como
       //estudiante:
+      console.log(this.data.nombreActivo);
       const reservaEst ={//datos para el backend de login
         id:this.data.idActivo,//id del activo
-        nomActivo:this.data.nomActivo,//nombre activo
+        nomActivo:this.data.nombreActivo,//nombre activo
         nombre:this.nombreTextbox,
         apellido:this.apellidoTextbox,
         correo:this.correoTextbox,
@@ -74,7 +75,7 @@ export class FormActivosComponent {
     else{ //si se seleccionó al profesor.
       const reservaProf ={//datos para el backend de login
         id:this.data.idActivo,//id del activo
-        nomActivo:this.data.nomActivo,//nombre activo
+        nomActivo:this.data.nombreActivo,//nombre activo
         nombre:this.nombreTextbox,
         apellido:this.apellidoTextbox,
         correo:this.correoTextbox,

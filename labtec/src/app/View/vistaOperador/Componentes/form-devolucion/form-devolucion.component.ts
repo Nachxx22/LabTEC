@@ -6,6 +6,7 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButtonToggle, MatButtonToggleChange, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {NgIf} from "@angular/common";
+import {ComunicationService} from "../../../../Servicios/comunication.service";
 @Component({
   selector: 'app-form-devolucion',
   standalone: true,
@@ -26,15 +27,33 @@ import {NgIf} from "@angular/common";
 export class FormDevolucionComponent {
   Averia: boolean = false; // Propiedad para almacenar el valor seleccionado del toggle
   banderaparaenviar:boolean=false;
+  password ="";//para los input
+  descripcionAberia=""; //para los input
   //metodo para manejar el tipo
   onToggleChange(event: MatButtonToggleChange) {
     this.Averia = event.value === "true";
     this.banderaparaenviar = true;
   }
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}//forma de pasar
-  //datos entre el componente de vista activos y el componente form-activos o
-  //el formulario de registros.
-  //data es el nombre de la data que se pasa , se usa en el html
+  constructor(private servicio:ComunicationService,@Inject(MAT_DIALOG_DATA) public data: any) {}//forma de pasar
 
+  devolverActivo(){
+    const devolActivo ={//datos para el backend de login
+      id:this.data.idActivo,//id del activo
+      nomActivo:this.data.nombreActivo,//nombre activo
+      contrasena:this.password,
+      desAveria:this.descripcionAberia,
+      averia:this.Averia,
+      //devuelve mart mayo 2 2024
+      //posible cambio a futuro.
+    }
+    this.servicio.Averias(devolActivo).subscribe(
+      response => {
+        console.log('Datos de reserva:', response);
+      },
+      error => {
+        console.error('Error al enviar datos al servidor:', error);
 
+      }
+    );
+  }
 }

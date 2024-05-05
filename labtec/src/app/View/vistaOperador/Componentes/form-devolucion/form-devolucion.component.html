@@ -14,11 +14,11 @@
     </mat-form-field>
   </p>
   <p><mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="onToggleChange($event)" [value]="false">
-    <mat-button-toggle value="false">Activo averiado</mat-button-toggle>
-    <mat-button-toggle value="true">Activo NO averiado</mat-button-toggle>
+    <mat-button-toggle value="false">Activo NO averiado</mat-button-toggle>
+    <mat-button-toggle value="true">Activo averiado</mat-button-toggle>
   </mat-button-toggle-group></p>
   <p><mat-form-field>
-    <input matInput placeholder="Contraseña operador">
+    <input matInput placeholder="Contraseña operador" >
   </mat-form-field></p>
 
   <p><mat-form-field *ngIf="Averia">
@@ -26,7 +26,7 @@
   </mat-form-field></p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary"  [disabled]="!banderaparaenviar">
+  <button mat-raised-button color="primary"  [disabled]="!banderaparaenviar" (click)="devolverActivo()">
     devolverActivo
   </button>
   <button mat-raised-button color="warn" mat-dialog-close>
