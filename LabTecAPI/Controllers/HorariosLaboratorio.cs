@@ -67,21 +67,7 @@ public class HorariosLaboratoriosController : ControllerBase
 
         // Devuelve una respuesta que indica que el horario ha sido creado exitosamente
         // CreatedAtAction devuelve un status code 201 (Created) y además puede devolver un URI al recurso creado si es necesario
-        return CreatedAtAction(nameof(GetHorarioLaboratorio), new { id = nuevoHorario.HorarioId }, nuevoHorario);
-    }
-
-
-
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<HorariosLaboratorio>> GetHorarioLaboratorio(int id)
-    {
-        var horario = await _context.HorariosLaboratorios.FindAsync(id);
-        if (horario == null)
-        {
-            return NotFound();
-        }
-        return horario;
+        return Ok();
     }
     
 }

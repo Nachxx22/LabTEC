@@ -148,3 +148,4 @@ C:\Users\Nacho\RiderProjects\LabTecAPI\LabTecAPI\obj\Debug\net8.0\refint\LabTecA
 C:\Users\Nacho\RiderProjects\LabTecAPI\LabTecAPI\obj\Debug\net8.0\LabTecAPI.pdb
 C:\Users\Nacho\RiderProjects\LabTecAPI\LabTecAPI\obj\Debug\net8.0\LabTecAPI.genruntimeconfig.cache
 C:\Users\Nacho\RiderProjects\LabTecAPI\LabTecAPI\obj\Debug\net8.0\ref\LabTecAPI.dll
+C:\Users\Nacho\RiderProjects\LabTecAPI\LabTecAPI\obj\Debug\net8.0\LabTecAPI.sourcelink.json
