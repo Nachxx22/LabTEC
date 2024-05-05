@@ -1,4 +1,3 @@
-using LabTecAPI.DataContext;
 using LabTecAPI.Models;
 using Microsoft.EntityFrameworkCore;
 

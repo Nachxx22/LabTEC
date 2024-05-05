@@ -70,4 +70,44 @@ public class HorariosLaboratoriosController : ControllerBase
         return Ok();
     }
     
+    //Request Adicionales
+    // GET: api/HorariosLaboratorios/cedulaProfesor
+    [HttpGet("Horarios/{cedula}")]
+    public async Task<IActionResult> GetHorariosByProfesor(string cedula)
+    {
+        var horarios = await _context.HorariosLaboratorios
+            .Where(h => h.CédulaProfesor == cedula)
+            .Select(h => new {
+                Fecha = h.Fecha,
+                HoraInicio = h.HoraInicio,
+                HoraFin = h.HoraFin,
+                CédulaProfesor = h.CédulaProfesor
+            })
+            .ToListAsync();
+
+        if (horarios == null || !horarios.Any())
+            return NotFound();
+
+        return Ok(horarios);
+    }
+    // GET: api/HorariosLaboratorios/Horarios
+    [HttpGet("Horarios")]
+    public async Task<IActionResult> GetHorarios()
+    {
+        var operadores = await _context.HorariosLaboratorios
+            .Select(o => new {
+                Horarioid=o.HorarioId,
+                Fecha = o.Fecha,
+                HoraInicio = o.HoraInicio,
+                HoraFin = o.HoraFin,
+                CédulaProfesor = o.CédulaProfesor
+            })
+            .ToListAsync();
+
+        if (operadores == null || !operadores.Any())
+            return NotFound();
+
+        return Ok(operadores);
+    }
+    
 }

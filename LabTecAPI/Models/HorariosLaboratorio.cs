@@ -6,7 +6,7 @@ namespace LabTecAPI.Models;
 
 public partial class HorariosLaboratorio
 {
-    [JsonIgnore]
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public int HorarioId { get; set; }
 
     public string LaboratorioNombre { get; set; } = null!;
@@ -19,9 +19,9 @@ public partial class HorariosLaboratorio
 
     public string? CédulaProfesor { get; set; }
 
-    [JsonIgnore]
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public virtual Profesore? CédulaProfesorNavigation { get; set; }
 
-    [JsonIgnore]
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public virtual Laboratorio LaboratorioNombreNavigation { get; set; } = null!;
 }

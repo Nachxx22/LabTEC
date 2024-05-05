@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace LabTecAPI.Models;
 
@@ -17,7 +18,9 @@ public partial class Operadore
 
     public string? Contraseña { get; set; }
 
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public virtual ICollection<Devolucione> Devoluciones { get; set; } = new List<Devolucione>();
 
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public virtual ICollection<Prestamo> Prestamos { get; set; } = new List<Prestamo>();
 }
