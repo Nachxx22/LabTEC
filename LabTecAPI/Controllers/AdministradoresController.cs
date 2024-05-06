@@ -59,4 +59,43 @@ public class AdministradoresController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAdministradores", new { correo = administrador.Correo }, administrador);
     }
+    // PUT: api/Administradores/{correo}
+    [HttpPut("{correo}")]
+    public async Task<IActionResult> UpdateAdministrador(string correo, [FromBody] Administradore administradorUpdated)
+    {
+        var administrador = await _context.Administradores.FindAsync(correo);
+        if (administrador == null)
+        {
+            return NotFound($"No se encontró un administrador con el correo {correo}.");
+        }
+
+        // Actualizar propiedades si son proporcionadas
+        if (administradorUpdated.Nombre != null)
+            administrador.Nombre = administradorUpdated.Nombre;
+        if (administradorUpdated.Contraseña != null)
+            administrador.Contraseña = administradorUpdated.Contraseña;
+
+        _context.Administradores.Update(administrador);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+    // DELETE: api/Administradores/{correo}
+    [HttpDelete("{correo}")]
+    public async Task<IActionResult> DeleteAdministrador(string correo)
+    {
+        var administrador = await _context.Administradores.FindAsync(correo);
+        if (administrador == null)
+        {
+            return NotFound($"No se encontró un administrador con el correo {correo}.");
+        }
+
+        _context.Administradores.Remove(administrador);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
+
+    
+    
 }

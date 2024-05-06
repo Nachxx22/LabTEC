@@ -27,7 +27,8 @@ public class ActivosController : ControllerBase
                 Tipo = a.Tipo,
                 Marca = a.Marca,
                 FechaCompra = a.FechaCompra,
-                ImagenUrl = a.ImagenUrl
+                ImagenUrl = a.ImagenUrl,
+                Ocupado=a.Ocupado
             })
             .ToListAsync();
 
@@ -47,7 +48,8 @@ public class ActivosController : ControllerBase
                 Tipo = a.Tipo,
                 Marca = a.Marca,
                 FechaCompra = a.FechaCompra,
-                ImagenUrl = a.ImagenUrl
+                ImagenUrl = a.ImagenUrl,
+                Ocupado=a.Ocupado
             })
             .FirstOrDefaultAsync();
 

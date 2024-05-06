@@ -58,6 +58,9 @@ public partial class LabManagementContext : DbContext
             entity.Property(e => e.Tipo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.Ocupado) // Añadir la configuración para el nuevo campo
+                .IsRequired() // Hace que el campo sea no nulo
+                .HasDefaultValue(false); // Establece un valor por defecto
         });
 
         modelBuilder.Entity<Administradore>(entity =>
@@ -186,12 +189,18 @@ public partial class LabManagementContext : DbContext
             entity.Property(e => e.Cedula)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.EstadoDelPrestamo)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.Placa)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.NecesitaAprobacion) // Añadir la configuración para el nuevo campo
+                .IsRequired() // Hace que el campo sea no nulo
+                .HasDefaultValue(false); // Establece un valor por defecto
+            entity.Property(e => e.EstadoAprobacion) // Añadir la configuración para el nuevo campo
+                .IsRequired() // Hace que el campo sea no nulo
+                .HasDefaultValue(false); // Establece un valor por defecto
+            entity.Property(e => e.Entregado) // Añadir la configuración para el nuevo campo
+                .IsRequired() // Hace que el campo sea no nulo
+                .HasDefaultValue(false); // Establece un valor por defecto
 
             entity.HasOne(d => d.CarnetNavigation).WithMany(p => p.Prestamos)
                 .HasForeignKey(d => d.Carnet)

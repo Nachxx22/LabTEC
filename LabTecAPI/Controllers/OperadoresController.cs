@@ -59,4 +59,57 @@ public class OperadoresController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetOperadores", new { carnet = operador.Carnet }, operador);
     }
+    // PUT: api/Operadores/{carnet}
+    [HttpPut("{carnet}")]
+    public async Task<IActionResult> UpdateOperador(string carnet, [FromBody] Operadore operadorUpdated)
+    {
+        var operador = await _context.Operadores.FindAsync(carnet);
+        if (operador == null)
+        {
+            return NotFound($"No se encontró un operador con el carnet {carnet}.");
+        }
+
+        // Actualizar propiedades si son proporcionadas
+        if (operadorUpdated.Nombre != null)
+            operador.Nombre = operadorUpdated.Nombre;
+        if (operadorUpdated.Apellido != null)
+            operador.Apellido = operadorUpdated.Apellido;
+        if (operadorUpdated.FechaNacimiento != null)
+            operador.FechaNacimiento = operadorUpdated.FechaNacimiento;
+        if (operadorUpdated.Correo != null)
+            operador.Correo = operadorUpdated.Correo;
+        if (operadorUpdated.Contraseña != null)
+            operador.Contraseña = operadorUpdated.Contraseña;
+
+        _context.Operadores.Update(operador);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+    // DELETE: api/Operadores/{carnet}
+    [HttpDelete("{carnet}")]
+    public async Task<IActionResult> DeleteOperador(string carnet)
+    {
+        var operador = await _context.Operadores.FindAsync(carnet);
+        if (operador == null)
+        {
+            return NotFound($"No se encontró un operador con el carnet {carnet}.");
+        }
+
+        // Eliminar relaciones en SesionesOperador
+        var sesiones = _context.SesionesOperadors.Where(s => s.Carnet == carnet);
+        _context.SesionesOperadors.RemoveRange(sesiones);
+
+        // Eliminar relaciones en Prestamos y Devoluciones si es posible, o manejarlas como null
+        var prestamos = _context.Prestamos.Where(p => p.Carnet == carnet);
+        _context.Prestamos.RemoveRange(prestamos);
+
+        _context.Operadores.Remove(operador);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
+
+
+
 }
