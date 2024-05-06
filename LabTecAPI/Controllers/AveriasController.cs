@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -58,8 +60,19 @@ public class AveriasController : ControllerBase
 
     // POST: api/Averias
     [HttpPost]
-    public async Task<IActionResult> PostAveria([FromBody] Averia nuevaAveria)
+    public async Task<IActionResult> PostAveria([FromBody] AveriaDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaDeRegistro, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+
+        var nuevaAveria = new Averia
+        {
+            DevolucionId = dto.DevolucionId,
+            Descripcion = dto.Descripcion,
+            FechaDeRegistro =DateOnly.FromDateTime(fechaParsed)
+        };
         _context.Averias.Add(nuevaAveria);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllAverias", new { id = nuevaAveria.AveriaId }, nuevaAveria);

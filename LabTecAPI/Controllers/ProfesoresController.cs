@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -53,20 +55,38 @@ public class ProfesoresController : ControllerBase
 
     // POST: api/Profesores
     [HttpPost]
-    public async Task<IActionResult> PostProfesor([FromBody] Profesore profesor)
+    public async Task<IActionResult> PostProfesor([FromBody] ProfesoreDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaNacimiento, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        var profesor = new Profesore
+        {
+            Cédula = dto.Cédula,
+            Nombre = dto.Nombre,
+            Apellido = dto.Apellido,
+            Edad = dto.Edad,
+            FechaNacimiento = DateOnly.FromDateTime(fechaParsed),
+            Correo = dto.Correo,
+            Contraseña = dto.Contraseña
+        };
         _context.Profesores.Add(profesor);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetProfesores", new { cedula = profesor.Cédula }, profesor);
     }
     // PUT: api/Profesores/{cédula}
     [HttpPut("{cedula}")]
-    public async Task<IActionResult> UpdateProfesor(string cedula, [FromBody] Profesore profesorUpdated)
+    public async Task<IActionResult> UpdateProfesor(string cedula, [FromBody] ProfesoreDto profesorUpdated)
     {
         var profesor = await _context.Profesores.FindAsync(cedula);
         if (profesor == null)
         {
             return NotFound($"No se encontró un profesor con la cédula {cedula}.");
+        }
+        if (!DateTime.TryParse(profesorUpdated.FechaNacimiento, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
         }
 
         // Actualizar propiedades si son proporcionadas
@@ -77,7 +97,7 @@ public class ProfesoresController : ControllerBase
         if (profesorUpdated.Edad != null)
             profesor.Edad = profesorUpdated.Edad;
         if (profesorUpdated.FechaNacimiento != null)
-            profesor.FechaNacimiento = profesorUpdated.FechaNacimiento;
+            profesor.FechaNacimiento = DateOnly.FromDateTime(fechaParsed);
         if (profesorUpdated.Correo != null)
             profesor.Correo = profesorUpdated.Correo;
         if (profesorUpdated.Contraseña != null)

@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -61,8 +63,21 @@ public class ActivosController : ControllerBase
 
     // POST: api/Activos
     [HttpPost]
-    public async Task<IActionResult> PostActivo([FromBody] Activo nuevoActivo)
+    public async Task<IActionResult> PostActivo([FromBody] ActivoDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaCompra, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        var nuevoActivo = new Activo
+        {
+            Placa=dto.Placa,
+            Tipo = dto.Marca,
+            Marca = dto.Marca,
+            FechaCompra =DateOnly.FromDateTime(fechaParsed) ,
+            ImagenUrl = dto.ImagenUrl,
+            Ocupado =dto.Ocupado ,
+        };
         _context.Activos.Add(nuevoActivo);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllActivos", new { placa = nuevoActivo.Placa }, nuevoActivo);

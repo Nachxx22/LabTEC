@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -58,8 +60,28 @@ public class SesionesOperadorController : ControllerBase
 
     // POST: api/SesionesOperador
     [HttpPost]
-    public async Task<IActionResult> PostSesionOperador([FromBody] SesionesOperador nuevaSesion)
+    public async Task<IActionResult> PostSesionOperador([FromBody] SesionesOperadorDto dto)
     {
+        if (!DateTime.TryParse(dto.Fecha, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        if (!TimeSpan.TryParse(dto.HoraInicio, out var horaInicioParsed))
+        {
+            return BadRequest("Hora de inicio inválida.");
+        }
+        if (!TimeSpan.TryParse(dto.HoraFin, out var horaFinParsed))
+        {
+            return BadRequest("Hora de fin inválida.");
+        }
+
+        var nuevaSesion = new SesionesOperador
+        {
+            Carnet = dto.Carnet,
+            Fecha = DateOnly.FromDateTime(fechaParsed),
+            HoraInicio = TimeOnly.FromTimeSpan(horaInicioParsed),
+            HoraFin = TimeOnly.FromTimeSpan(horaFinParsed),
+        };
         _context.SesionesOperadors.Add(nuevaSesion);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllSesionesOperador", new { carnet = nuevaSesion.Carnet }, nuevaSesion);

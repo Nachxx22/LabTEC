@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -72,8 +74,36 @@ public class PrestamosController : ControllerBase
 
     // POST: api/Prestamos
     [HttpPost]
-    public async Task<IActionResult> PostPrestamo([FromBody] Prestamo nuevoPrestamo)
+    public async Task<IActionResult> PostPrestamo([FromBody] PrestamoDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaPrestamo, out var fechaPrestamoParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        if (!DateTime.TryParse(dto.FechaDeAprobacion, out var fechaAprobacionParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        
+        if (!TimeSpan.TryParse(dto.HoraPrestamo, out var horaPrestamoParsed))
+        {
+            return BadRequest("Hora de inicio inválida.");
+        }
+
+        var nuevoPrestamo = new Prestamo
+        {
+            Placa = dto.Placa,
+            Carnet = dto.Carnet,
+            FechaPrestamo = DateOnly.FromDateTime(fechaPrestamoParsed),
+            HoraPrestamo = TimeOnly.FromTimeSpan(horaPrestamoParsed),
+            CarnetEstudiante = dto.CarnetEstudiante,
+            FechaDeAprobacion = DateOnly.FromDateTime(fechaAprobacionParsed),
+            Cedula = dto.Cedula,
+            NecesitaAprobacion = dto.NecesitaAprobacion,
+            EstadoAprobacion = dto.NecesitaAprobacion,
+            Entregado = dto.Entregado
+            
+        };
         _context.Prestamos.Add(nuevoPrestamo);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllPrestamos", new { id = nuevoPrestamo.PrestamoId }, nuevoPrestamo);

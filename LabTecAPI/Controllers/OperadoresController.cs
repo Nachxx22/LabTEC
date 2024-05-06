@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -53,8 +55,22 @@ public class OperadoresController : ControllerBase
 
     // POST: api/Operadores
     [HttpPost]
-    public async Task<IActionResult> PostOperador([FromBody] Operadore operador)
+    public async Task<IActionResult> PostOperador([FromBody] OperadorDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaNacimiento, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+
+        var operador = new Operadore
+        {
+            Carnet = dto.Carnet,
+            Nombre = dto.Nombre,
+            Apellido = dto.Apellido,
+            FechaNacimiento = DateOnly.FromDateTime(fechaParsed),
+            Correo = dto.Correo,
+            Contraseña = dto.Contraseña
+        };
         _context.Operadores.Add(operador);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetOperadores", new { carnet = operador.Carnet }, operador);
