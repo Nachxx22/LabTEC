@@ -52,6 +52,43 @@ public class OperadoresController : ControllerBase
 
         return Ok(operador);
     }
+    // POST: api/Operadores
+    [HttpPost]
+    public async Task<IActionResult> PostOperador([FromBody] OperadorDto dto)
+    {
+        if (dto == null || string.IsNullOrWhiteSpace(dto.Carnet) || string.IsNullOrWhiteSpace(dto.Correo))
+        {
+            return BadRequest("Carnet y Correo son campos obligatorios.");
+        }
+
+        var nuevoOperador = new Operadore
+        {
+            Carnet = dto.Carnet,
+            Nombre = dto.Nombre,
+            Apellido = dto.Apellido,
+            FechaNacimiento = !string.IsNullOrEmpty(dto.FechaNacimiento) && DateOnly.TryParse(dto.FechaNacimiento, out var fechaNacParsed) 
+                ? fechaNacParsed 
+                : null,
+            Correo = dto.Correo,
+            Contraseña = dto.Contraseña,
+            Cedula = dto.Cedula,
+            Edad = dto.Edad,
+            Aprobado = dto.Aprobado ?? false
+        };
+
+        _context.Operadores.Add(nuevoOperador);
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            // Manejo de errores específicos como violaciones de restricciones de la base de datos
+            return BadRequest($"Error al guardar los datos: {ex.Message}");
+        }
+
+        return CreatedAtAction(nameof(PostOperador), new { carnet = nuevoOperador.Carnet }, nuevoOperador);
+    }
     
     // PUT: api/Operadores/{carnet}
     [HttpPut("{carnet}")]

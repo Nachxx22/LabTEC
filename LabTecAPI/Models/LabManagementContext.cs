@@ -173,6 +173,12 @@ public partial class LabManagementContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Cedula) // Añadir la configuración para el nuevo campo
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Aprobado) // Añadir la configuración para el nuevo campo
+                .IsRequired() // Hace que el campo sea no nulo
+                .HasDefaultValue(false); // Establece un valor por defecto
         });
 
         modelBuilder.Entity<Prestamo>(entity =>
