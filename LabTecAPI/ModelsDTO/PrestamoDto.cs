@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace LabTecAPI.ModelsDTO;
 
 public class PrestamoDto
 {
-    
+    [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public int PrestamoId { get; set; }
 
     public string? Placa { get; set; } 
