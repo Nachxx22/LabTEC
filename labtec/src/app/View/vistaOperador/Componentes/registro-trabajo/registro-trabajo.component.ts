@@ -8,14 +8,13 @@ import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {ComunicationService} from "../../../../Servicios/comunication.service";
-import {DataSource} from "@angular/cdk/collections";
+
 
 export interface Registros {
   fecha: string;
   ingreso: string;
   salida: string;
-  horasTrabajadas: number,
-  usuario:string;
+  horasTrabajadas: number
 }
 
 @Component({
@@ -50,7 +49,9 @@ export class RegistroTrabajoComponent {
 
   //metodo que obtiene los reportes del usuario.
   obtenerReportes(){
-    this.servicio.getReportes("gerardo").subscribe(
+    console.log('Datos enviados al servidor:', this.servicio.getUsuarioId());
+    //pide los reportes del usuario iniciado en esta sesion.
+    this.servicio.getReportes(this.servicio.getUsuarioId()).subscribe(
       response => {
         console.log('Datos enviados al servidor:', response);
         // Realiza cualquier otra lógica que necesites aquí

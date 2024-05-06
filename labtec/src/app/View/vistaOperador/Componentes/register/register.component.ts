@@ -39,14 +39,14 @@ export class RegisterComponent {
   registrarUsuario() {
     //json de datos de registro para enviar al backend
     const datosaRegistrar ={//datos para el backend de login
-      cedula:this.cedulaTextbox,//int
-      carnet:this.carnetTextbox,//int
-      nombre:this.nombreTextbox,
-      apellido:this.apellidoTextbox,
-      edad:this.edadTextbox,//edad es int
-      fechaNacimiento:this.fenacimientoTextbox,//string por el momento
-      correo:this.correoTextbox,//string
-      contrasena:this.passwordTextbox//string
+      Cedula:this.cedulaTextbox,//int
+      Carnet:this.carnetTextbox,//int
+      Nombre:this.nombreTextbox,
+      Apellido:this.apellidoTextbox,
+      Edad:this.edadTextbox,//edad es int
+      FechaNacimiento:this.fenacimientoTextbox,//string por el momento
+      Correo:this.correoTextbox,//string
+      Contraseña:this.passwordTextbox//ESTE PUEDE DAR PROBLEMAS
       //posible cambio a futuro.
     }
     //metodo que llama al comunication service y envia los datos:
