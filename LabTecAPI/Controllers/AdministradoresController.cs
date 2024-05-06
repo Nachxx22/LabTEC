@@ -69,17 +69,15 @@ public class AdministradoresController : ControllerBase
             return NotFound($"No se encontró un administrador con el correo {correo}.");
         }
 
-        // Actualizar propiedades si son proporcionadas
-        if (administradorUpdated.Nombre != null)
-            administrador.Nombre = administradorUpdated.Nombre;
-        if (administradorUpdated.Contraseña != null)
-            administrador.Contraseña = administradorUpdated.Contraseña;
+        if (administradorUpdated.Nombre != null) administrador.Nombre = administradorUpdated.Nombre;
+        if (administradorUpdated.Contraseña != null) administrador.Contraseña = administradorUpdated.Contraseña;
 
         _context.Administradores.Update(administrador);
         await _context.SaveChangesAsync();
-
         return NoContent();
     }
+
+
     // DELETE: api/Administradores/{correo}
     [HttpDelete("{correo}")]
     public async Task<IActionResult> DeleteAdministrador(string correo)

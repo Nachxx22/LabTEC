@@ -84,30 +84,52 @@ public class ProfesoresController : ControllerBase
         {
             return NotFound($"No se encontró un profesor con la cédula {cedula}.");
         }
-        if (!DateTime.TryParse(profesorUpdated.FechaNacimiento, out var fechaParsed))
+
+        bool dataChanged = false;
+        if (profesorUpdated.Nombre != null && profesor.Nombre != profesorUpdated.Nombre)
         {
-            return BadRequest("Fecha inválida.");
+            profesor.Nombre = profesorUpdated.Nombre;
+            dataChanged = true;
+        }
+        if (profesorUpdated.Apellido != null && profesor.Apellido != profesorUpdated.Apellido)
+        {
+            profesor.Apellido = profesorUpdated.Apellido;
+            dataChanged = true;
+        }
+        if (profesorUpdated.Edad.HasValue && profesor.Edad != profesorUpdated.Edad)
+        {
+            profesor.Edad = profesorUpdated.Edad.Value;
+            dataChanged = true;
+        }
+        if (!string.IsNullOrEmpty(profesorUpdated.FechaNacimiento) && DateTime.TryParse(profesorUpdated.FechaNacimiento, out var fechaParsed))
+        {
+            DateOnly parsedDate = DateOnly.FromDateTime(fechaParsed);
+            if (profesor.FechaNacimiento != parsedDate)
+            {
+                profesor.FechaNacimiento = parsedDate;
+                dataChanged = true;
+            }
+        }
+        if (profesorUpdated.Correo != null && profesor.Correo != profesorUpdated.Correo)
+        {
+            profesor.Correo = profesorUpdated.Correo;
+            dataChanged = true;
+        }
+        if (profesorUpdated.Contraseña != null && profesor.Contraseña != profesorUpdated.Contraseña)
+        {
+            profesor.Contraseña = profesorUpdated.Contraseña;
+            dataChanged = true;
         }
 
-        // Actualizar propiedades si son proporcionadas
-        if (profesorUpdated.Nombre != null)
-            profesor.Nombre = profesorUpdated.Nombre;
-        if (profesorUpdated.Apellido != null)
-            profesor.Apellido = profesorUpdated.Apellido;
-        if (profesorUpdated.Edad != null)
-            profesor.Edad = profesorUpdated.Edad;
-        if (profesorUpdated.FechaNacimiento != null)
-            profesor.FechaNacimiento = DateOnly.FromDateTime(fechaParsed);
-        if (profesorUpdated.Correo != null)
-            profesor.Correo = profesorUpdated.Correo;
-        if (profesorUpdated.Contraseña != null)
-            profesor.Contraseña = profesorUpdated.Contraseña;
-
-        _context.Profesores.Update(profesor);
-        await _context.SaveChangesAsync();
+        if (dataChanged)
+        {
+            _context.Profesores.Update(profesor);
+            await _context.SaveChangesAsync();
+        }
 
         return NoContent();
     }
+
     // DELETE: api/Profesores/{cédula}
     [HttpDelete("{cedula}")]
     public async Task<IActionResult> DeleteProfesor(string cedula)

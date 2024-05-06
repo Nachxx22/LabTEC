@@ -22,9 +22,9 @@ public partial class Prestamo
     public DateOnly? FechaDeAprobacion { get; set; }
 
     public string? Cedula { get; set; }
-    public bool NecesitaAprobacion { get; set; } = false;
-    public bool EstadoAprobacion { get; set; } = false;
-    public bool Entregado { get; set; } = false;
+    public bool? NecesitaAprobacion { get; set; } = false;
+    public bool? EstadoAprobacion { get; set; } = false;
+    public bool? Entregado { get; set; } = false;
 
     [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public virtual Operadore CarnetNavigation { get; set; } = null!;

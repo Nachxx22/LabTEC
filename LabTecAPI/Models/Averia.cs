@@ -9,7 +9,7 @@ public partial class Averia
     [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST
     public int AveriaId { get; set; }
 
-    public int DevolucionId { get; set; }
+    public int? DevolucionId { get; set; }
 
     public string? Descripcion { get; set; }
 

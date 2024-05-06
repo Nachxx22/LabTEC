@@ -86,4 +86,26 @@ public class SesionesOperadorController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllSesionesOperador", new { carnet = nuevaSesion.Carnet }, nuevaSesion);
     }
+    // PUT: api/SesionesOperador/{carnet}
+    [HttpPut("{carnet}")]
+    public async Task<IActionResult> UpdateSesionOperador(string carnet, [FromBody] SesionesOperadorDto sesionUpdated)
+    {
+        var sesion = await _context.SesionesOperadors.FirstOrDefaultAsync(s => s.Carnet == carnet);
+        if (sesion == null)
+        {
+            return NotFound($"No se encontró una sesión con el carnet {carnet}.");
+        }
+
+        if (!string.IsNullOrEmpty(sesionUpdated.Fecha) && DateOnly.TryParse(sesionUpdated.Fecha, out var fechaParsed))
+            sesion.Fecha = fechaParsed;
+        if (!string.IsNullOrEmpty(sesionUpdated.HoraInicio) && TimeOnly.TryParse(sesionUpdated.HoraInicio, out var horaInicioParsed))
+            sesion.HoraInicio = horaInicioParsed;
+        if (!string.IsNullOrEmpty(sesionUpdated.HoraFin) && TimeOnly.TryParse(sesionUpdated.HoraFin, out var horaFinParsed))
+            sesion.HoraFin = horaFinParsed;
+
+        _context.SesionesOperadors.Update(sesion);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }

@@ -100,7 +100,7 @@ public class PrestamosController : ControllerBase
             FechaDeAprobacion = DateOnly.FromDateTime(fechaAprobacionParsed),
             Cedula = dto.Cedula,
             NecesitaAprobacion = dto.NecesitaAprobacion,
-            EstadoAprobacion = dto.NecesitaAprobacion,
+            EstadoAprobacion = dto.EstadoAprobacion,
             Entregado = dto.Entregado
             
         };
@@ -108,4 +108,41 @@ public class PrestamosController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllPrestamos", new { id = nuevoPrestamo.PrestamoId }, nuevoPrestamo);
     }
+    // PUT: api/Prestamos/{prestamoId}
+    [HttpPut("{prestamoId}")]
+    public async Task<IActionResult> UpdatePrestamo(int prestamoId, [FromBody] PrestamoDto prestamoUpdated)
+    {
+        var prestamo = await _context.Prestamos.FindAsync(prestamoId);
+        if (prestamo == null)
+        {
+            return NotFound($"No se encontró un préstamo con el ID {prestamoId}.");
+        }
+
+        // Actualiza campos sólo si se proporcionan en el DTO
+        if (prestamoUpdated.Placa != null)
+            prestamo.Placa = prestamoUpdated.Placa;
+        if (prestamoUpdated.Carnet != null)
+            prestamo.Carnet = prestamoUpdated.Carnet;
+        if (!string.IsNullOrEmpty(prestamoUpdated.FechaPrestamo) && DateOnly.TryParse(prestamoUpdated.FechaPrestamo, out var fechaPrestamoParsed))
+            prestamo.FechaPrestamo = fechaPrestamoParsed;
+        if (!string.IsNullOrEmpty(prestamoUpdated.HoraPrestamo) && TimeOnly.TryParse(prestamoUpdated.HoraPrestamo, out var horaPrestamoParsed))
+            prestamo.HoraPrestamo = horaPrestamoParsed;
+        if (prestamoUpdated.CarnetEstudiante != null)
+            prestamo.CarnetEstudiante = prestamoUpdated.CarnetEstudiante;
+        if (!string.IsNullOrEmpty(prestamoUpdated.FechaDeAprobacion) && DateOnly.TryParse(prestamoUpdated.FechaDeAprobacion, out var fechaAprobacionParsed))
+            prestamo.FechaDeAprobacion = fechaAprobacionParsed;
+        if (prestamoUpdated.Cedula != null)
+            prestamo.Cedula = prestamoUpdated.Cedula;
+        if (prestamoUpdated.NecesitaAprobacion.HasValue)
+            prestamo.NecesitaAprobacion = prestamoUpdated.NecesitaAprobacion.Value;
+        if (prestamoUpdated.EstadoAprobacion.HasValue)
+            prestamo.EstadoAprobacion = prestamoUpdated.EstadoAprobacion.Value;
+        if (prestamoUpdated.Entregado.HasValue)
+            prestamo.Entregado = prestamoUpdated.Entregado.Value;
+
+        _context.Prestamos.Update(prestamo);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }

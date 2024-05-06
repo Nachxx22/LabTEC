@@ -52,29 +52,7 @@ public class OperadoresController : ControllerBase
 
         return Ok(operador);
     }
-
-    // POST: api/Operadores
-    [HttpPost]
-    public async Task<IActionResult> PostOperador([FromBody] OperadorDto dto)
-    {
-        if (!DateTime.TryParse(dto.FechaNacimiento, out var fechaParsed))
-        {
-            return BadRequest("Fecha inválida.");
-        }
-
-        var operador = new Operadore
-        {
-            Carnet = dto.Carnet,
-            Nombre = dto.Nombre,
-            Apellido = dto.Apellido,
-            FechaNacimiento = DateOnly.FromDateTime(fechaParsed),
-            Correo = dto.Correo,
-            Contraseña = dto.Contraseña
-        };
-        _context.Operadores.Add(operador);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction("GetOperadores", new { carnet = operador.Carnet }, operador);
-    }
+    
     // PUT: api/Operadores/{carnet}
     [HttpPut("{carnet}")]
     public async Task<IActionResult> UpdateOperador(string carnet, [FromBody] Operadore operadorUpdated)

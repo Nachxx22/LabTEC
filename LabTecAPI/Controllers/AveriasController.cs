@@ -77,4 +77,31 @@ public class AveriasController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllAverias", new { id = nuevaAveria.AveriaId }, nuevaAveria);
     }
+    // PUT: api/Averias/{averiaId}
+    [HttpPut("{averiaId}")]
+    public async Task<IActionResult> UpdateAveria(int averiaId, [FromBody] AveriaDto averiaUpdated)
+    {
+        var averia = await _context.Averias.FindAsync(averiaId);
+        if (averia == null)
+        {
+            return NotFound($"No se encontró una avería con el ID {averiaId}.");
+        }
+
+        // Actualiza el campo DevolucionId solo si se proporciona en el DTO
+        if (averiaUpdated.DevolucionId.HasValue)
+            averia.DevolucionId = averiaUpdated.DevolucionId.Value;
+
+        // Actualiza la descripción solo si se proporciona en el DTO
+        if (averiaUpdated.Descripcion != null)
+            averia.Descripcion = averiaUpdated.Descripcion;
+
+        // Convierte y actualiza la fecha de registro solo si se proporciona en el DTO
+        if (!string.IsNullOrEmpty(averiaUpdated.FechaDeRegistro) && DateOnly.TryParse(averiaUpdated.FechaDeRegistro, out var fechaParsed))
+            averia.FechaDeRegistro = fechaParsed;
+
+        _context.Averias.Update(averia);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }

@@ -82,4 +82,26 @@ public class ActivosController : ControllerBase
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllActivos", new { placa = nuevoActivo.Placa }, nuevoActivo);
     }
+    // PUT: api/Activos/{placa}
+    [HttpPut("{placa}")]
+    public async Task<IActionResult> UpdateActivo(string placa, [FromBody] ActivoDto activoUpdated)
+    {
+        var activo = await _context.Activos.FindAsync(placa);
+        if (activo == null)
+        {
+            return NotFound($"No se encontró un activo con la placa {placa}.");
+        }
+
+        if (activoUpdated.Tipo != null) activo.Tipo = activoUpdated.Tipo;
+        if (activoUpdated.Marca != null) activo.Marca = activoUpdated.Marca;
+        if (!string.IsNullOrEmpty(activoUpdated.FechaCompra) && DateOnly.TryParse(activoUpdated.FechaCompra, out var fechaCompraParsed))
+            activo.FechaCompra = fechaCompraParsed;
+        if (activoUpdated.ImagenUrl != null) activo.ImagenUrl = activoUpdated.ImagenUrl;
+        if (activoUpdated.Ocupado.HasValue) activo.Ocupado = activoUpdated.Ocupado.Value;
+
+        _context.Activos.Update(activo);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }
