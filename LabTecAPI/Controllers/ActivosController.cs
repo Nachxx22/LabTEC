@@ -1,3 +1,5 @@
+using LabTecAPI.ModelsDTO;
+
 namespace LabTecAPI.Controllers;
 
 using LabTecAPI.Models;
@@ -27,7 +29,8 @@ public class ActivosController : ControllerBase
                 Tipo = a.Tipo,
                 Marca = a.Marca,
                 FechaCompra = a.FechaCompra,
-                ImagenUrl = a.ImagenUrl
+                ImagenUrl = a.ImagenUrl,
+                Ocupado=a.Ocupado
             })
             .ToListAsync();
 
@@ -47,7 +50,8 @@ public class ActivosController : ControllerBase
                 Tipo = a.Tipo,
                 Marca = a.Marca,
                 FechaCompra = a.FechaCompra,
-                ImagenUrl = a.ImagenUrl
+                ImagenUrl = a.ImagenUrl,
+                Ocupado=a.Ocupado
             })
             .FirstOrDefaultAsync();
 
@@ -59,10 +63,45 @@ public class ActivosController : ControllerBase
 
     // POST: api/Activos
     [HttpPost]
-    public async Task<IActionResult> PostActivo([FromBody] Activo nuevoActivo)
+    public async Task<IActionResult> PostActivo([FromBody] ActivoDto dto)
     {
+        if (!DateTime.TryParse(dto.FechaCompra, out var fechaParsed))
+        {
+            return BadRequest("Fecha inválida.");
+        }
+        var nuevoActivo = new Activo
+        {
+            Placa=dto.Placa,
+            Tipo = dto.Marca,
+            Marca = dto.Marca,
+            FechaCompra =DateOnly.FromDateTime(fechaParsed) ,
+            ImagenUrl = dto.ImagenUrl,
+            Ocupado =dto.Ocupado ,
+        };
         _context.Activos.Add(nuevoActivo);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetAllActivos", new { placa = nuevoActivo.Placa }, nuevoActivo);
     }
+    // PUT: api/Activos/{placa}
+    [HttpPut("{placa}")]
+    public async Task<IActionResult> UpdateActivo(string placa, [FromBody] ActivoDto activoUpdated)
+    {
+        var activo = await _context.Activos.FindAsync(placa);
+        if (activo == null)
+        {
+            return NotFound($"No se encontró un activo con la placa {placa}.");
+        }
+
+        if (activoUpdated.Tipo != null) activo.Tipo = activoUpdated.Tipo;
+        if (activoUpdated.Marca != null) activo.Marca = activoUpdated.Marca;
+        if (!string.IsNullOrEmpty(activoUpdated.FechaCompra) && DateOnly.TryParse(activoUpdated.FechaCompra, out var fechaCompraParsed))
+            activo.FechaCompra = fechaCompraParsed;
+        if (activoUpdated.ImagenUrl != null) activo.ImagenUrl = activoUpdated.ImagenUrl;
+        if (activoUpdated.Ocupado.HasValue) activo.Ocupado = activoUpdated.Ocupado.Value;
+
+        _context.Activos.Update(activo);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }

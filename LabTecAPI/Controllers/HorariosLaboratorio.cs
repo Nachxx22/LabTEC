@@ -69,6 +69,32 @@ public class HorariosLaboratoriosController : ControllerBase
         // CreatedAtAction devuelve un status code 201 (Created) y además puede devolver un URI al recurso creado si es necesario
         return Ok();
     }
+    // PUT: api/HorariosLaboratorio/{horarioId}
+    [HttpPut("{horarioId}")]
+    public async Task<IActionResult> UpdateHorarioLaboratorio(int horarioId, [FromBody] HorariosLaboratorioDto horarioUpdated)
+    {
+        var horario = await _context.HorariosLaboratorios.FindAsync(horarioId);
+        if (horario == null)
+        {
+            return NotFound($"No se encontró un horario con el ID {horarioId}.");
+        }
+
+        if (horarioUpdated.LaboratorioNombre != null)
+            horario.LaboratorioNombre = horarioUpdated.LaboratorioNombre;
+        if (!string.IsNullOrEmpty(horarioUpdated.Fecha) && DateOnly.TryParse(horarioUpdated.Fecha, out var fechaParsed))
+            horario.Fecha = fechaParsed;
+        if (!string.IsNullOrEmpty(horarioUpdated.HoraInicio) && TimeOnly.TryParse(horarioUpdated.HoraInicio, out var horaInicioParsed))
+            horario.HoraInicio = horaInicioParsed;
+        if (!string.IsNullOrEmpty(horarioUpdated.HoraFin) && TimeOnly.TryParse(horarioUpdated.HoraFin, out var horaFinParsed))
+            horario.HoraFin = horaFinParsed;
+        if (horarioUpdated.CédulaProfesor != null)
+            horario.CédulaProfesor = horarioUpdated.CédulaProfesor;
+
+        _context.HorariosLaboratorios.Update(horario);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
     
     //Request Adicionales
     // GET: api/HorariosLaboratorios/cedulaProfesor
