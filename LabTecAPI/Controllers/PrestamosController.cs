@@ -28,10 +28,11 @@ public class PrestamosController : ControllerBase
                 p.PrestamoId,
                 p.Placa,
                 p.Carnet,
+                p.Nombre,
+                p.Apellido,
+                p.Correo,
                 p.FechaPrestamo,
                 p.HoraPrestamo,
-                p.CarnetEstudiante,
-                p.FechaDeAprobacion,
                 p.Cedula,
                 p.NecesitaAprobacion,
                 p.EstadoAprobacion,
@@ -55,10 +56,11 @@ public class PrestamosController : ControllerBase
                 p.PrestamoId,
                 p.Placa,
                 p.Carnet,
+                p.Nombre,
+                p.Apellido,
+                p.Correo,
                 p.FechaPrestamo,
                 p.HoraPrestamo,
-                p.CarnetEstudiante,
-                p.FechaDeAprobacion,
                 p.Cedula,
                 p.NecesitaAprobacion,
                 p.EstadoAprobacion,
@@ -80,10 +82,6 @@ public class PrestamosController : ControllerBase
         {
             return BadRequest("Fecha inválida.");
         }
-        if (!DateTime.TryParse(dto.FechaDeAprobacion, out var fechaAprobacionParsed))
-        {
-            return BadRequest("Fecha inválida.");
-        }
         
         if (!TimeSpan.TryParse(dto.HoraPrestamo, out var horaPrestamoParsed))
         {
@@ -99,8 +97,6 @@ public class PrestamosController : ControllerBase
             Correo = dto.Nombre,
             FechaPrestamo = DateOnly.FromDateTime(fechaPrestamoParsed),
             HoraPrestamo = TimeOnly.FromTimeSpan(horaPrestamoParsed),
-            CarnetEstudiante = dto.CarnetEstudiante,
-            FechaDeAprobacion = DateOnly.FromDateTime(fechaAprobacionParsed),
             Cedula = dto.Cedula,
             NecesitaAprobacion = dto.NecesitaAprobacion,
             EstadoAprobacion = dto.EstadoAprobacion,
@@ -123,16 +119,18 @@ public class PrestamosController : ControllerBase
         // Actualiza campos sólo si se proporcionan en el DTO
         if (prestamoUpdated.Placa != null)
             prestamo.Placa = prestamoUpdated.Placa;
+        if (prestamoUpdated.Correo != null)
+            prestamo.Correo = prestamoUpdated.Correo;
+        if (prestamoUpdated.Nombre != null)
+            prestamo.Nombre = prestamoUpdated.Nombre;
+        if (prestamoUpdated.Apellido != null)
+            prestamo.Apellido = prestamoUpdated.Apellido;
         if (prestamoUpdated.Carnet != null)
             prestamo.Carnet = prestamoUpdated.Carnet;
         if (!string.IsNullOrEmpty(prestamoUpdated.FechaPrestamo) && DateOnly.TryParse(prestamoUpdated.FechaPrestamo, out var fechaPrestamoParsed))
             prestamo.FechaPrestamo = fechaPrestamoParsed;
         if (!string.IsNullOrEmpty(prestamoUpdated.HoraPrestamo) && TimeOnly.TryParse(prestamoUpdated.HoraPrestamo, out var horaPrestamoParsed))
             prestamo.HoraPrestamo = horaPrestamoParsed;
-        if (prestamoUpdated.CarnetEstudiante != null)
-            prestamo.CarnetEstudiante = prestamoUpdated.CarnetEstudiante;
-        if (!string.IsNullOrEmpty(prestamoUpdated.FechaDeAprobacion) && DateOnly.TryParse(prestamoUpdated.FechaDeAprobacion, out var fechaAprobacionParsed))
-            prestamo.FechaDeAprobacion = fechaAprobacionParsed;
         if (prestamoUpdated.Cedula != null)
             prestamo.Cedula = prestamoUpdated.Cedula;
         if (prestamoUpdated.NecesitaAprobacion.HasValue)

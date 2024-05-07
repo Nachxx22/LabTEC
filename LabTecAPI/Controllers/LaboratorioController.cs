@@ -34,6 +34,30 @@ public class LaboratorioController : ControllerBase
 
         return Ok(laboratorio);
     }
+    // GET: api/HorariosLaboratorios/Laboratorios
+    [HttpGet]
+    public async Task<IActionResult> GetLaboratorios()
+    {
+        var laboratorios = await _context.Laboratorios
+            .Select(l => new {
+                Nombre = l.Nombre,
+                Capacidad = l.Capacidad,
+                Computadoras = l.Computadoras,
+                Facilidades = l.Facilidades
+                // Si decides incluir información básica de horarios, puedes descomentar la siguiente línea
+                // Horarios = l.HorariosLaboratorios.Select(h => new { h.Fecha, h.HoraInicio, h.HoraFin, h.CédulaProfesor })
+            })
+            .ToListAsync();
+
+        if (laboratorios == null || !laboratorios.Any())
+            return NotFound("No se encontraron laboratorios.");
+
+        return Ok(laboratorios);
+    }
+
+   
+
+    
 
     // POST: api/Laboratorios
     [HttpPost]
@@ -61,5 +85,6 @@ public class LaboratorioController : ControllerBase
         await _context.SaveChangesAsync();
         return NoContent();
     }
+    
 
 }

@@ -37,7 +37,7 @@ public partial class LabManagementContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-VARTID5\\SQLEXPRESS;Database=LabManagement;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=NACHO-DESKTOP\\SQLEXPRESS;Database=LabManagement;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -56,6 +56,9 @@ public partial class LabManagementContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Tipo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Cedula)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Ocupado) // Añadir la configuración para el nuevo campo
@@ -189,13 +192,19 @@ public partial class LabManagementContext : DbContext
             entity.Property(e => e.Carnet)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.CarnetEstudiante)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.Cedula)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Placa)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Correo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Apellido)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.NecesitaAprobacion) // Añadir la configuración para el nuevo campo

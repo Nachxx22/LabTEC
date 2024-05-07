@@ -1,4 +1,5 @@
 ﻿using LabTecAPI.Models;
+
 namespace LabTecAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ public class ReportesOperadores : ControllerBase
     public async Task<IActionResult>obtenerReportes(string idOperador)
     {
         //estructura de devolucion de vuelta:
-        
+
         var listaResultados = new List<object>();
         var usuario = await _context.SesionesOperadors
             .Where(a => a.Carnet == idOperador) //busqueme donde el correo 

@@ -11,5 +11,6 @@ public class ActivoDto
     public string? FechaCompra { get; set; }
 
     public string? ImagenUrl { get; set; }
+    public string? Cedula { get; set; }
     public bool? Ocupado { get; set; } = false;
 }

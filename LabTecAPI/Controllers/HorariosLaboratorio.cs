@@ -17,7 +17,44 @@ public class HorariosLaboratoriosController : ControllerBase
     {
         _context = context;
     }
+    // GET: api/HorariosLaboratorios/Lab01F2/2023-04-24
+    [HttpGet("{laboratorioNombre}/{fecha?}")]
+    public async Task<IActionResult> GetHorariosByLaboratorio(string laboratorioNombre, string fecha = null)
+    {
+        IQueryable<HorariosLaboratorio> query = _context.HorariosLaboratorios
+            .Where(h => h.LaboratorioNombre == laboratorioNombre);
 
+        if (!string.IsNullOrEmpty(fecha))
+        {
+            if (DateOnly.TryParse(fecha, out DateOnly parsedFecha))
+            {
+                query = query.Where(h => h.Fecha == parsedFecha);
+            }
+            else
+            {
+                return BadRequest("Formato de fecha inválido");
+            }
+        }
+
+        var horarios = await query
+            .Select(h => new {
+                Fecha = h.Fecha,
+                HoraInicio = h.HoraInicio,
+                HoraFin = h.HoraFin,
+                CédulaProfesor = h.CédulaProfesor
+            })
+            .ToListAsync();
+
+        if (!horarios.Any())
+            return NotFound("No se encontraron horarios para este laboratorio o fecha");
+
+        return Ok(horarios);
+    }
+
+
+
+
+    /*
     // GET: api/HorariosLaboratorios/Lab01F2
     [HttpGet("{laboratorioNombre}")]
     public async Task<IActionResult> GetHorariosByLaboratorio(string laboratorioNombre)
@@ -37,6 +74,7 @@ public class HorariosLaboratoriosController : ControllerBase
 
         return Ok(horarios);
     }
+    */
     [HttpPost]
     public async Task<IActionResult> PostHorarioLaboratorio([FromBody] HorariosLaboratorioDto dto)
     {

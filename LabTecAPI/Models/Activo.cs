@@ -15,6 +15,7 @@ public partial class Activo
     public DateOnly? FechaCompra { get; set; }
 
     public string? ImagenUrl { get; set; }
+    public string? Cedula { get; set; }
     public bool? Ocupado { get; set; } = false;
 
     [JsonIgnore] //Funciona para que se ignore y no aparezca en el request del POST

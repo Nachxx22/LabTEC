@@ -107,6 +107,8 @@ public class OperadoresController : ControllerBase
             operador.Apellido = operadorUpdated.Apellido;
         if (operadorUpdated.FechaNacimiento != null)
             operador.FechaNacimiento = operadorUpdated.FechaNacimiento;
+        if (operadorUpdated.Cedula != null)
+            operador.Cedula = operadorUpdated.Cedula;
         if (operadorUpdated.Correo != null)
             operador.Correo = operadorUpdated.Correo;
         if (operadorUpdated.Contraseña != null)

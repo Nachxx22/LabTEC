@@ -19,11 +19,6 @@ public partial class Prestamo
     public string? Nombre { get; set; }
     public string? Apellido { get; set; }
     public string? Correo  { get; set; }
-    public string? CarnetEstudiante { get; set; }
-    
-
-    public DateOnly? FechaDeAprobacion { get; set; }
-
     public string? Cedula { get; set; }
     public bool? NecesitaAprobacion { get; set; } = false;
     public bool? EstadoAprobacion { get; set; } = false;
