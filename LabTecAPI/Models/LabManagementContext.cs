@@ -204,7 +204,7 @@ public partial class LabManagementContext : DbContext
             entity.Property(e => e.Correo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.Apellido)
+            entity.Property(e => e.Apellidos)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.NecesitaAprobacion) // Añadir la configuración para el nuevo campo

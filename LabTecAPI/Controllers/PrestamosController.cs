@@ -29,7 +29,7 @@ public class PrestamosController : ControllerBase
                 p.Placa,
                 p.Carnet,
                 p.Nombre,
-                p.Apellido,
+                p.Apellidos,
                 p.Correo,
                 p.FechaPrestamo,
                 p.HoraPrestamo,
@@ -57,7 +57,7 @@ public class PrestamosController : ControllerBase
                 p.Placa,
                 p.Carnet,
                 p.Nombre,
-                p.Apellido,
+                p.Apellidos,
                 p.Correo,
                 p.FechaPrestamo,
                 p.HoraPrestamo,
@@ -93,7 +93,7 @@ public class PrestamosController : ControllerBase
             Placa = dto.Placa,
             Carnet = dto.Carnet,
             Nombre = dto.Nombre,
-            Apellido = dto.Nombre,
+            Apellidos = dto.Nombre,
             Correo = dto.Nombre,
             FechaPrestamo = DateOnly.FromDateTime(fechaPrestamoParsed),
             HoraPrestamo = TimeOnly.FromTimeSpan(horaPrestamoParsed),
@@ -123,8 +123,8 @@ public class PrestamosController : ControllerBase
             prestamo.Correo = prestamoUpdated.Correo;
         if (prestamoUpdated.Nombre != null)
             prestamo.Nombre = prestamoUpdated.Nombre;
-        if (prestamoUpdated.Apellido != null)
-            prestamo.Apellido = prestamoUpdated.Apellido;
+        if (prestamoUpdated.Apellidos != null)
+            prestamo.Apellidos = prestamoUpdated.Apellidos;
         if (prestamoUpdated.Carnet != null)
             prestamo.Carnet = prestamoUpdated.Carnet;
         if (!string.IsNullOrEmpty(prestamoUpdated.FechaPrestamo) && DateOnly.TryParse(prestamoUpdated.FechaPrestamo, out var fechaPrestamoParsed))

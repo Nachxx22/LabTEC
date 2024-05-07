@@ -24,7 +24,7 @@ public class PrestamoDto
     
     public string? Nombre { get; set; }
     
-    public string? Apellido { get; set; }
+    public string? Apellidos { get; set; }
     
     public string? Correo { get; set; }
     //fecha de aprobación del profesor.lo hace la vista Profesor
