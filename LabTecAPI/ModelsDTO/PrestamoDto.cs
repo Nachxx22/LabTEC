@@ -18,8 +18,6 @@ public class PrestamoDto
 
     public string? HoraPrestamo { get; set; }
     
-    [JsonIgnore]
-    public string? CarnetEstudiante { get; set; } //ELIMINAR
     //añadido de las 3 variables faltantes
     
     public string? Nombre { get; set; }
@@ -28,7 +26,6 @@ public class PrestamoDto
     
     public string? Correo { get; set; }
     //fecha de aprobación del profesor.lo hace la vista Profesor
-    public string? FechaDeAprobacion { get; set; } //ELIMINAR
     //para saber que profesor lo aprueba
     
     //cedula de quien lo aprueba 

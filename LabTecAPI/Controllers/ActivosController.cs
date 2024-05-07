@@ -68,7 +68,8 @@ public class ActivosController : ControllerBase
                 Marca = a.Marca,
                 FechaCompra = a.FechaCompra,
                 ImagenUrl = a.ImagenUrl,
-                Ocupado=a.Ocupado
+                Ocupado=a.Ocupado,
+                Cedula = a.Cedula
             })
             .FirstOrDefaultAsync();
 
@@ -93,7 +94,8 @@ public class ActivosController : ControllerBase
             Marca = dto.Marca,
             FechaCompra =DateOnly.FromDateTime(fechaParsed) ,
             ImagenUrl = dto.ImagenUrl,
-            Ocupado =dto.Ocupado ,
+            Ocupado =dto.Ocupado,
+            Cedula = dto.Cedula
         };
         _context.Activos.Add(nuevoActivo);
         await _context.SaveChangesAsync();
@@ -115,7 +117,7 @@ public class ActivosController : ControllerBase
             activo.FechaCompra = fechaCompraParsed;
         if (activoUpdated.ImagenUrl != null) activo.ImagenUrl = activoUpdated.ImagenUrl;
         if (activoUpdated.Ocupado.HasValue) activo.Ocupado = activoUpdated.Ocupado.Value;
-
+        if (activoUpdated.Cedula != null) activo.Cedula = activoUpdated.Cedula;
         _context.Activos.Update(activo);
         await _context.SaveChangesAsync();
         return NoContent();
