@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterOutlet} from "@angular/router";
-
+import { Component, OnInit } from '@angular/core';
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
+import {ComunicationService} from "../../auth.service";
 
 @Component({
   selector: 'app-vista-profesor',
@@ -12,14 +13,20 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   templateUrl: './vista-profesor.component.html',
   styleUrl: './vista-profesor.component.css'
 })
-export class VistaProfesorComponent {
+export class VistaProfesorComponent implements OnInit {
+  NombreProfesor: string = "";
 
-  menuBarVisible: boolean = false;
+  constructor(private servicio: ComunicationService) {}
 
-  toggleMenuBar() {
-    this.menuBarVisible = !this.menuBarVisible;
+  ngOnInit() {
+    this.NombreProfesor = this.servicio.getNombreProfesor();
+    //console.log("Este es el nombre que se recibe en la vista profesor " + this.NombreProfesor);
   }
-
 }
+
+
+
+
+
 
 

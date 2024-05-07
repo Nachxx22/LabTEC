@@ -1,0 +1,61 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <select class="form-select" [(ngModel)]="laboratorioSeleccionado" (change)="onLaboratorioSelected()">
+        <option value="" disabled selected>Seleccione un laboratorio</option>
+        <option *ngFor="let lab of laboratorios" [value]="lab.name">{{ lab.name }}</option>
+      </select>
+    </div>
+    <div class="col-12 mb-3">
+      <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="onLaboratorioSelected()">
+    </div>
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr><th>Horas</th><th>Estado</th><th>Reservar</th></tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hour of dayHours">
+          <td>{{ hour }}</td>
+          <td [class.ocupado]="isReserved(hour)">{{ isReserved(hour) ? 'Ocupado' : 'Libre' }}</td>
+          <td class="text-end">
+            <button class="btn btn-primary" *ngIf="!isReserved(hour)" (click)="prepararReserva(hour)">Reservar</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Div para mostrar y completar la reserva sólo si una hora ha sido seleccionada -->
+    <div class="col-12 mt-4" *ngIf="selectedHour">
+      <h3>Detalles de la Reserva</h3>
+      <form [formGroup]="reservaForm" class="row g-3">
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Nombre del Laboratorio" formControlName="LaboratorioNombre" [value]="laboratorioSeleccionado">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Hora Inicio" formControlName="HoraInicio" [value]="selectedHour" >
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Hora Fin" formControlName="HoraFin">
+        </div>
+        <div class="col-md-2">
+          <input type="date" class="form-control" placeholder="Fecha" formControlName="Fecha">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Cédula Profesor" formControlName="CédulaProfesor">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success" (click)="enviarReserva()">Confirmar Reserva</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

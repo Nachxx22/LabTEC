@@ -7,10 +7,10 @@ import {CambioPasswordComponent} from "./View/vista-profesor/cambio-password/cam
 import {ReservacionesComponent} from "./View/vista-profesor/reservaciones/reservaciones.component";
 import {InicioComponent} from "./View/vista-profesor/inicio/inicio.component";
 import {LoginProfesorComponent} from "./View/vista-profesor/login-profesor/login-profesor.component";
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { FormsModule } from '@angular/forms';
+import {CalendarioComponent} from "./View/vista-profesor/calendario/calendario.component";
 
 export const routes: Routes = [
   {path: 'sidenav', component: SidenavComponent},
@@ -20,7 +20,8 @@ export const routes: Routes = [
     children:[{path: 'cambio-password',component: CambioPasswordComponent},
       {path:'aprovacion-prestamo',component:AprovacionPrestamoComponent},
       {path:'reservaciones',component: ReservacionesComponent},
-      {path:'inicio',component: InicioComponent}]},
+      {path:'inicio',component: InicioComponent},
+      {path: 'calendario', component: CalendarioComponent}]},
   {path: '', redirectTo: 'login-profesor', pathMatch: 'full'}
   //children:[{path: 'tipoplato',component: TipoplatoComponent},
   // {path:'menu',component:MenuComponent},

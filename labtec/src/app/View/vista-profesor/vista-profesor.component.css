@@ -9,15 +9,27 @@
 
 .line-custom{
   border: 2px solid #000000; /* Grosor y color del borde */
+}
 
+.container-nombre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem; /* rounded-5 */
+  height: 60px;
+  width: 700px;
+  background-color: #37405d;
+  position: fixed;
+  left: 50%; /* Establece el borde izquierdo en el 50% del contenedor */
+  transform: translateX(-50%);
 }
 
 .container {
   height: 100vh; /* 100% de la altura de la ventana gráfica */
   max-width: 100%; /* Ajuste máximo del ancho de la ventana gráfica */
-  overflow-y: hidden; /* Oculta el desbordamiento vertical */
-  background-color: #576291;
+  background-color: #445072;
   color: #000000;
+  overflow: auto; /* Agrega un scroll si es necesario */
 }
 
 .container .sidenav {

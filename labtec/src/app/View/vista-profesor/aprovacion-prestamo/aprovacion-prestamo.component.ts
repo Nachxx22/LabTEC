@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -17,15 +17,18 @@ import {NgForOf} from "@angular/common";
 import {MatTableModule} from "@angular/material/table";
 import {NgFor} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
+import {ComunicationService} from "../../../auth.service";
 
 
-export interface Platillos { //por ahora esta interfaz queda asi
-  Activo: string;
-  Solicitante: string;
-  Operador: string;
+
+
+interface InformacionType {
+  id: number;
+  placa: string;
+  fechaPrestamo: string;
+  estadoAprobacion: string;
+  // Agrega otras propiedades según sea necesario
 }
-const platillos_ver: Platillos[] = [
-  { Activo: 'FPGA', Solicitante: 'Pepe', Operador: 'Juan' }];
 
 
 
@@ -56,15 +59,76 @@ const platillos_ver: Platillos[] = [
   templateUrl: './aprovacion-prestamo.component.html',
   styleUrl: './aprovacion-prestamo.component.css'
 })
-export class AprovacionPrestamoComponent {
+export class AprovacionPrestamoComponent implements OnInit {
 
-  data = [
-    { id: 1, componente: 'FPGA', solicitante: 'Andrés', carnet: '2020129522', estado: '' }
-    // Agrega más datos aquí si es necesario
-  ];
+  Cedula: string = "";
+  data: InformacionType[] = [];
 
-  updateStatus(item: any, status: string) {
-    item.estado = status;
+  async OrdenaInformacion(Informacion: InformacionType[]) {
+    console.log(Informacion.length);
+    // @ts-ignore
+    this.data = this.data.concat(Informacion);
   }
+
+
+
+  async updateStatus(item: any, status: string) {
+
+    if(status == "Aceptado"){
+
+    }
+    
+
+    item.estadoAprobacion = status;
+    console.log("Este es el id " + item.id);
+    console.log("Esta es la placa " + item.placa);
+    console.log("Esta es la fecha " + item.fechaPrestamo);
+
+
+    fetch('http://localhost:5276/api/ActualizarRecurso', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json' // Tipo de contenido que estás enviando
+        // Opcional: otros encabezados según sea necesario
+      },
+      body: JSON.stringify(this.data) // Datos que deseas enviar en la solicitud PUT
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Hubo un problema al actualizar el recurso.');
+        }
+        // Si la respuesta es exitosa, puedes hacer algo aquí si lo deseas
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+  }
+
+  constructor(private servicio: ComunicationService) {}
+
+  ngOnInit() {
+    this.Cedula = this.servicio.getCedulaProfesor();
+    this.consultarSolicitudes(this.Cedula);
+
+  }
+
+  async consultarSolicitudes(cedulaProfesor: string): Promise<void> {
+
+
+    fetch(`http://localhost:5276/api/VistaProfesor/${cedulaProfesor}`, {
+      method: 'Get',
+    })
+      .then(response => response.json())
+      .then(data => {
+
+        //console.log(this.Informacion);
+        this.OrdenaInformacion(data);
+      });
+
+
+  }
+
+
 
 }
