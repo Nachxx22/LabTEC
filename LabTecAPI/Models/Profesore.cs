@@ -6,7 +6,7 @@ namespace LabTecAPI.Models;
 
 public partial class Profesore
 {
-    public string Cédula { get; set; } = null!;
+    public string? Cédula { get; set; } = null!;
 
     public string? Nombre { get; set; }
 
@@ -16,7 +16,7 @@ public partial class Profesore
 
     public DateOnly? FechaNacimiento { get; set; }
 
-    public string Correo { get; set; } = null!;
+    public string? Correo { get; set; } = null!;
 
     public string? Contraseña { get; set; }
 

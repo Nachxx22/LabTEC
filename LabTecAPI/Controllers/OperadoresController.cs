@@ -92,7 +92,7 @@ public class OperadoresController : ControllerBase
     
     // PUT: api/Operadores/{carnet}
     [HttpPut("{carnet}")]
-    public async Task<IActionResult> UpdateOperador(string carnet, [FromBody] Operadore operadorUpdated)
+    public async Task<IActionResult> UpdateOperador(string carnet, [FromBody] OperadorDto operadorUpdated)
     {
         var operador = await _context.Operadores.FindAsync(carnet);
         if (operador == null)
@@ -105,8 +105,8 @@ public class OperadoresController : ControllerBase
             operador.Nombre = operadorUpdated.Nombre;
         if (operadorUpdated.Apellido != null)
             operador.Apellido = operadorUpdated.Apellido;
-        if (operadorUpdated.FechaNacimiento != null)
-            operador.FechaNacimiento = operadorUpdated.FechaNacimiento;
+        if (!string.IsNullOrEmpty(operadorUpdated.FechaNacimiento) && DateOnly.TryParse(operadorUpdated.FechaNacimiento, out var fechaParsed))
+            operador.FechaNacimiento = fechaParsed;
         if (operadorUpdated.Cedula != null)
             operador.Cedula = operadorUpdated.Cedula;
         if (operadorUpdated.Correo != null)

@@ -6,11 +6,11 @@ namespace LabTecAPI.Models;
 
 public partial class Prestamo
 {
-    public int PrestamoId { get; set; }
+    public int? PrestamoId { get; set; }
 
-    public string Placa { get; set; } 
+    public string? Placa { get; set; } 
 
-    public string Carnet { get; set; }
+    public string? Carnet { get; set; }
 
     public DateOnly? FechaPrestamo { get; set; }
 
