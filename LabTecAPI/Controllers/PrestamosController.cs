@@ -94,6 +94,9 @@ public class PrestamosController : ControllerBase
         {
             Placa = dto.Placa,
             Carnet = dto.Carnet,
+            Nombre = dto.Nombre,
+            Apellido = dto.Nombre,
+            Correo = dto.Nombre,
             FechaPrestamo = DateOnly.FromDateTime(fechaPrestamoParsed),
             HoraPrestamo = TimeOnly.FromTimeSpan(horaPrestamoParsed),
             CarnetEstudiante = dto.CarnetEstudiante,
@@ -102,7 +105,6 @@ public class PrestamosController : ControllerBase
             NecesitaAprobacion = dto.NecesitaAprobacion,
             EstadoAprobacion = dto.EstadoAprobacion,
             Entregado = dto.Entregado
-            
         };
         _context.Prestamos.Add(nuevoPrestamo);
         await _context.SaveChangesAsync();

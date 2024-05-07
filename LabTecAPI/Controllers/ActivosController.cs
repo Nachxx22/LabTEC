@@ -39,6 +39,23 @@ public class ActivosController : ControllerBase
 
         return Ok(activos);
     }
+    [HttpGet("activosDisponibles")]
+    public async Task<IActionResult> GetActivosDisponibles()
+    {
+        var activos = await _context.Activos
+            .Where(a => a.Ocupado != true)
+            .Select(a => new {
+                id = a.Placa,
+                name = a.Tipo,
+                description = a.Marca,
+                imageURL = a.ImagenUrl
+            })
+            .ToListAsync();
+        if (activos == null || !activos.Any())
+            return NotFound();
+
+        return Ok(activos);
+    }
     // GET: api/Activos/{placa}
     [HttpGet("{placa}")]
     public async Task<IActionResult> GetActivoByPlaca(string placa)

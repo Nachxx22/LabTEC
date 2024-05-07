@@ -33,18 +33,16 @@ public class ReportesOperadores : ControllerBase
             })
             .ToListAsync();
         //si no lo encuentra, o la contraseña es inválida , retorna false
-        if(usuario != null ){
-            foreach (var resultado in usuario)
+        foreach (var resultado in usuario)
+        {
+            listaResultados.Add(new
             {
-                listaResultados.Add(new
-                {
-                    fecha = resultado.Fecha,
-                    ingreso = resultado.Ingreso,
-                    salida = resultado.Salida,
-                    horasTrabajadas = resultado.Horastrabajadas
-                });
-            }
+                fecha = resultado.Fecha,
+                ingreso = resultado.Ingreso,
+                salida = resultado.Salida,
+                horasTrabajadas = resultado.Horastrabajadas
+            });
         }
-        return Ok(listaResultados );//retorn
+        return Ok(listaResultados);//retorn
     }
 }
