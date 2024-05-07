@@ -19,18 +19,24 @@ export class ComunicationService {
 
   constructor(private http: HttpClient) {}
   //obtiene los reportes de este usuario
+
+  //COMPLETADA------
   getReportes(username:string): Observable<any> {//idOperador es como lo tengo en la bd
     //DEBE DE SER EXACTAMENTE IGUAL EN LA API
     return this.http.get<any>(`${this.servidorURL}/ReportesOperadores/getReportes?idOperador=${username}`);
   }
   //obtiene los activos de este usuario.
+
+
+  //COMPLETADA------------
   getActivos(): Observable<any> {
-    return this.http.get<any>(`${this.servidorURL}/getActivos`);
+    return this.http.get<any>(`${this.servidorURL}/Activos/activosDisponibles`);
   }
   //metodo que obtiene los activos por aprobar por el operador.
   getaprobarSolicitud(username:string): Observable<any> {
     return this.http.get<any>(`${this.servidorURL}/getsolAprob?username=${username}`);
   }
+  //COMPLETADA****
   verifyLogin(Correo: string , Contrasena: string): Observable<any> {
     return this.http.get<any>(`${this.servidorURL}/Loginop/verificarLogin?correo=${Correo}&contrasena=${Contrasena}`);
   }
@@ -46,7 +52,7 @@ export class ComunicationService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(`${this.servidorURL}/reservactivoEst`, reservaEdata,httpOptions);
+    return this.http.post<any>(`${this.servidorURL}/Prestamos`, reservaEdata,httpOptions);
   }
   //solicitud reserva para profesores
   solicitarReservaP(reservaPdata: any): Observable<any> {
@@ -55,7 +61,7 @@ export class ComunicationService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(`${this.servidorURL}/reservactivoProf`, reservaPdata,httpOptions);
+    return this.http.post<any>(`${this.servidorURL}/Prestamos`, reservaPdata,httpOptions);
   }
   registrarse(registrarsedata: any): Observable<any> {
     const httpOptions = {
@@ -63,7 +69,7 @@ export class ComunicationService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(`${this.servidorURL}/Loginop/registrarse`, registrarsedata,httpOptions);
+    return this.http.post<any>(`${this.servidorURL}/Operadores`, registrarsedata,httpOptions);
   }
   Averias(averiadata: any): Observable<any> {
     const httpOptions = {
@@ -72,5 +78,13 @@ export class ComunicationService {
       })
     };
     return this.http.post<any>(`${this.servidorURL}/averias`, averiadata,httpOptions);
+  }
+  logout(logoutData: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<any>(`${this.servidorURL}/SesionesOperador`, logoutData,httpOptions);
   }
 }

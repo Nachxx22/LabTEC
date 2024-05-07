@@ -28,14 +28,14 @@ export class RegisterComponent {
   }
   //variables para los input o textbox del componente , aca se reciben
   //lo que el usuario ingrese
-  cedulaTextbox= "";
-  carnetTextbox="";
-  nombreTextbox= "";
-  apellidoTextbox="";
-  edadTextbox= "";
-  fenacimientoTextbox="";
-  correoTextbox="";
-  passwordTextbox= "";
+  cedulaTextbox= "";//check
+  carnetTextbox=""; //check
+  nombreTextbox= ""; //check
+  apellidoTextbox=""; //check
+  edadTextbox= "";//check
+  fenacimientoTextbox="";//check
+  correoTextbox=""; //check
+  passwordTextbox= "";//check
   registrarUsuario() {
     //json de datos de registro para enviar al backend
     const datosaRegistrar ={//datos para el backend de login
@@ -43,11 +43,11 @@ export class RegisterComponent {
       Carnet:this.carnetTextbox,//int
       Nombre:this.nombreTextbox,
       Apellido:this.apellidoTextbox,
-      Edad:this.edadTextbox,//edad es int
+      Edad:parseInt(this.edadTextbox),//edad es int
       FechaNacimiento:this.fenacimientoTextbox,//string por el momento
       Correo:this.correoTextbox,//string
-      Contraseña:this.passwordTextbox//ESTE PUEDE DAR PROBLEMAS
-      //posible cambio a futuro.
+      Contraseña:this.passwordTextbox,//ESTE PUEDE DAR PROBLEMAS
+      Aprobado:false
     }
     //metodo que llama al comunication service y envia los datos:
     this.servicio.registrarse(datosaRegistrar).subscribe(
@@ -58,7 +58,6 @@ export class RegisterComponent {
         console.error('Error al enviar datos al servidor:', error);
       }
     );
-
   }
   volverLogin(){
     this.router.navigate(['login']);

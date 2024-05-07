@@ -36,10 +36,15 @@
           Devolución de activos
         </button>
       </mat-list-item>
+      <mat-list-item>
+        <button (click)="logout()" routerLink="/login" mat-button>
+          <mat-icon>power_settings_new</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          logout
+        </button>
+      </mat-list-item>
       <!-- Agregar más elementos de lista aquí de ser necesario -->
     </mat-nav-list>
   </mat-drawer>
-
   <!-- Contenido principal -->
   <mat-drawer-content>
     <div style="text-align: center;min-height: 600px;">
