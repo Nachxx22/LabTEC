@@ -1,0 +1,20 @@
+<mat-toolbar>
+  <p>
+    <mat-form-field>
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="dp3" disabled>
+      <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </p>
+</mat-toolbar>
+<mat-grid-list cols="8" rowHeight="100px">
+  <!-- Columna de Horas -->
+  <mat-grid-tile *ngFor="let day of daysOfWeek">{{ day }}</mat-grid-tile>
+  <!--la columa de horas, me va a crear una tile por cada elemento en hours-->
+  <!--Columna de elementos , para añadir las cards-->
+  <mat-grid-tile *ngFor="let day of daysOfWeek">
+
+  </mat-grid-tile>
+</mat-grid-list>
+

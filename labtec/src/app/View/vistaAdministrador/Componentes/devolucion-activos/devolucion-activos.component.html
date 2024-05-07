@@ -1,0 +1,52 @@
+<div class=" container" >
+  <mat-toolbar>
+    <span style="margin-right: auto;">Activos disponibles</span>
+    <div class="contenedorBotones">
+      <button   mat-raised-button (click)="mostrarActivos()" class="contenedorBot4" >
+        activos por aprobar
+      </button>
+    </div>
+  </mat-toolbar>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre del activo </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombreRegistrado">
+      <th mat-header-cell *matHeaderCellDef> Nombre del solicitante</th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreRegistrado}} </td>
+    </ng-container>
+    <!-- descripcion-->
+    <ng-container matColumnDef="apellidoRegistrado">
+      <th mat-header-cell *matHeaderCellDef> Apellido del solicitante </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellidoRegistrado}} </td>
+    </ng-container>
+    <!-- acciones-->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef> correo </th>
+      <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fechaSolicitud">
+      <th mat-header-cell *matHeaderCellDef> Fecha de solicitud</th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaSolicitud}} </td>
+    </ng-container>
+    <ng-container matColumnDef="devolver">
+      <th mat-header-cell *matHeaderCellDef> Devolver activo</th>
+      <td mat-cell *matCellDef="let element"> <!--el let element si es necesario-->
+        <button mat-button color="primary" (click)="mostrarForm(element.id,element.nombre,element.correo)" > Devolver Activo</button>
+      </td>
+    </ng-container>
+
+    <!-- acciones-->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

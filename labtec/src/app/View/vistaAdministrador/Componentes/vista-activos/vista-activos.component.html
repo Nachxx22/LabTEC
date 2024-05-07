@@ -1,0 +1,34 @@
+<!---->
+<div class="container mt-5">
+  <mat-toolbar>
+    <span style="margin-right: auto;">Activos disponibles</span>
+    <div class="contenedorBotones">
+      <button   mat-raised-button (click)="mostrarActivos()" class="contenedorBot4" >
+        mostrar reportes
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="row">
+    <div class="col-4" *ngFor="let activo of activosRecibidos; let i = index">
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="row">
+            <div fxFlex="40%">
+              <img [src]="activo.imageURL" class="imagen-contenedor" alt="notfout">
+              <p class="">{{activo.name}}</p>
+            </div>
+            <div fxFlex="60%" fxLayout="column" fxLayoutAlign="end">
+              <h4 class="">{{activo.description}}</h4>
+              <button mat-raised-button color="primary" (click)="mostrarForm(i)">Reservar</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<!-- para abrir el modal-->
+<!-- Agrega este componente modal dentro del template de tu componente Angular -->
+
+
+

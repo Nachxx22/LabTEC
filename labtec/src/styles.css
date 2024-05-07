@@ -1,5 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+
+
 
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.imagen-contenedor {
+  max-width: 100%;
+  height: auto;
+}
+.mat-card {
+  border: none;
+  transition: transform 0.2s;
+}
+
+/* Estilo para el título de la tarjeta */
+.mat-card-title {
+  text-align: center;
+}
+
+/* Estilos al pasar el mouse sobre la tarjeta */
+.mat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.modalabierto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-dialog {
+  width: 80%; /* Puedes ajustar el ancho según tus necesidades */
+  max-width: 600px; /* También puedes establecer un ancho máximo */
+}
+
+.modal-content {
+  background-color: #fff; /* Color de fondo del modal */
+  border-radius: 10px; /* Radio de borde para suavizar las esquinas */
+  padding: 20px; /* Espaciado interior del contenido */
+}
+
+.modal-header {
+  border-bottom: none; /* Elimina el borde inferior del encabezado */
+}
+
+.modal-body {
+  /* Puedes agregar estilos adicionales según el contenido del cuerpo */
+}
+
+.modal-footer {
+  border-top: none; /* Elimina el borde superior del pie de página */
+}
+
+.modal-title {
+  margin-bottom: 0; /* Elimina el margen inferior del título */
+}
+

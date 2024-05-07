@@ -12,25 +12,31 @@
   <mat-drawer #drawer opened="false" mode="over">
     <mat-nav-list>
       <mat-list-item>
-        <button routerLink="tipoplato" mat-button>
-          <mat-icon>restaurant_menu</mat-icon> <!-- Agrega el nombre del ícono que desees -->
-          Tipo de plato
+        <button routerLink="reistrotrabajo" mat-button>
+          <mat-icon>checklist</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Reportes
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button routerLink="menu" mat-button>
+        <button routerLink="vistaActivos" mat-button>
           <mat-icon>menu_book</mat-icon> <!-- Agrega el nombre del ícono que desees -->
-          Menú
+          Préstamo de activos.
         </button>
 
       </mat-list-item>
       <mat-list-item>
-        <button routerLink="estadisticas" mat-button>
+        <button routerLink="vistaLaboratorios" mat-button>
           <mat-icon>bar_chart</mat-icon> <!-- Agrega el nombre del ícono que desees -->
-          Estadísticas
+          Reservación de laboratorios
         </button>
       </mat-list-item>
-      <!-- Agrega más elementos de lista aquí si es necesario -->
+      <mat-list-item>
+        <button routerLink="vistaDevoluciones" mat-button>
+          <mat-icon>bar_chart</mat-icon> <!-- Agrega el nombre del ícono que desees -->
+          Devolución de activos
+        </button>
+      </mat-list-item>
+      <!-- Agregar más elementos de lista aquí de ser necesario -->
     </mat-nav-list>
   </mat-drawer>
 
@@ -38,6 +44,7 @@
   <mat-drawer-content>
     <div style="text-align: center;min-height: 600px;">
       <router-outlet></router-outlet>
+      <!-- aca se debe de lamar el router-outlet para que funcione -->
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
